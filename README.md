@@ -1,4 +1,4 @@
-GlucoTracker
+GlucoTrack
 
 Aplicação para controle de diabetes fazendo o acompanhamento da glicemia e do consumo de calorias.
 
