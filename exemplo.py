@@ -1,7 +1,9 @@
 from entidades.usuario import Usuario
 from entidades.paciente import Paciente
+from entidades.medicacao import Medicacao
 from dao.usuarioDAO import UsuarioDAO
 from dao.pacienteDAO import PacienteDAO
+from dao.medicaoDAO import MedicacaoDAO
 import os
 
 def tela_usuario_logado():
@@ -12,12 +14,26 @@ def tela_usuario_logado():
 def cadastrar_medicacoes(codigo_paciente):
     limpa_tela()
     nome_sistema()
-    input("Opção ainda não implementada")
+    print("")
+
+    medicacaoDAO = MedicacaoDAO()
+
+    nome = str(input("Nome do remédio: "))
+    hora_inicial = str(input("Hora inicial: "))
+    periodo = int(input("De quantas em quantas horas?: "))
+    lembrar = str(input("Lembrar ? (S/N): "))
+
+    medicao = Medicacao(None, codigo_paciente, nome, hora_inicial, periodo, lembrar)
+    codigo = medicacaoDAO.inserir(medicao)
+    if codigo > 0:
+        print("Medicacão incluida com sucesso!")
+        input("")
+    else:
+        input("Erro na inclusão da medicação")
 
 def cadastrar_paciente(codigo_usuario):
     limpa_tela()
     nome_sistema()
-    print("Cadastre suas informações pessoais:")
     print("")
 
     pacienteDAO = PacienteDAO()

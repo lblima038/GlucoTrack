@@ -1,0 +1,10 @@
+[
+    {
+        "codigo": 1,
+        "codigo_paciente": 1,
+        "nome": "Dipirona",
+        "hora_inicial": "8:00",
+        "periodo": 1,
+        "lembrar": "S"
+    }
+]
