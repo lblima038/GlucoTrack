@@ -133,7 +133,9 @@ def escolha(codigo_usuario):
                     escolha(codigo_usuario)
 
         case 3:
-            cadastrar_medicacoes(codigo_usuario)
+            pacienteDAO = PacienteDAO()
+            paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
+            cadastrar_medicacoes(paciente.codigo)
             tela_usuario_logado()
             escolha(codigo_usuario)
 
