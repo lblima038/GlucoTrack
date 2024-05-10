@@ -4,25 +4,32 @@ from dao.usuarioDAO import UsuarioDAO
 from dao.pacienteDAO import PacienteDAO
 import os
 
-codigoUsuario = -1
-
 def tela_usuario_logado():
     limpa_tela()
     nome_sistema()
     menu_logado()
 
-def cadastrar_paciente():
+def cadastrar_medicacoes(codigo_paciente):
     limpa_tela()
     nome_sistema()
+    input("Opção ainda não implementada")
+
+def cadastrar_paciente(codigo_usuario):
+    limpa_tela()
+    nome_sistema()
+    print("Cadastre suas informações pessoais:")
+    print("")
 
     pacienteDAO = PacienteDAO()
 
-    paciente = Paciente(None, codigoUsuario, nome, 0, 0, 0, "M", peso, altura)
     nome = str(input("Nome: "))
-    peso = float(input("Peso: "))
-    altura = float(input("Altura: "))
-
+    peso = float(input("Peso (kg): "))
+    altura = float(input("Altura (cm): "))
+    nascimento = str(input("Data nascimento (dd/mm/aaaa): "))
+    paciente = Paciente(None, codigo_usuario, nome, 0, 0, 0, "M", peso, altura)
     pacienteDAO.inserir(paciente)
+    print("")
+    input("Cadastro efetuado com sucesso")
 
 def logar_usuario():
 
@@ -38,6 +45,7 @@ def logar_usuario():
     if codigo == -1:
         input("email ou senha inválidos")
     else:
+        print("")
         print("Usuario ", codigo, " autenticado com sucesso")
         input("")
 
@@ -59,10 +67,12 @@ def cadastrar_usuario():
 
     codigo_usuario = usuarioDAO.inserir(usuario)
     if codigo_usuario == -1:
+        print("")
         print("Já existe um usuário com este email")
         input("pressione qualquer tecla")
         return
     elif codigo_usuario > 0:
+        print("")
         print("Usuário cadastrado com sucesso!")
         input("Pressione qualquer tecla para voltar")
 
@@ -78,26 +88,38 @@ def menu_inicial():
     print("")
 
 def menu_logado():
-    print("3  - Cadastrar paciente")
+    print("3  - Cadastrar medicações")
+    print("4  - Registrar Glicemia")
     print("99 - Finalizar")
     print("")
 
-def escolha():
+def escolha(codigo_usuario):
     opcao = int(input("Opção: "))
     match (opcao):
         case 1:
             cadastrar_usuario()
 
         case 2:
-            codigo = logar_usuario()
-            if codigo > 0:
-                codigoUsuario = codigo
-                tela_usuario_logado()
-                escolha()
+            # Tentar logar no sistema
+            codigo_usuario = logar_usuario()
+            if codigo_usuario > 0:
+                # logado com sucesso
+                # verifica se já existe paciente registrado
+                pacienteDAO = PacienteDAO()
+                paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
+                if paciente != None:
+                    # paciente já registrado
+                    tela_usuario_logado()
+                    escolha(paciente.codigo_usuario)
+                else:
+                    cadastrar_paciente(codigo_usuario)
+                    tela_usuario_logado()
+                    escolha(codigo_usuario)
 
         case 3:
-            cadastrar_paciente()
-            escolha()
+            cadastrar_medicacoes(codigo_usuario)
+            tela_usuario_logado()
+            escolha(codigo_usuario)
 
         case 99:
             exit()
@@ -110,7 +132,7 @@ def main():
     limpa_tela()
     nome_sistema()
     menu_inicial()
-    escolha()
+    escolha(None)
     main()
 
 if __name__ == '__main__':

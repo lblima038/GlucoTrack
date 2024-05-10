@@ -1,0 +1,12 @@
+[
+    {
+        "codigo": 1,
+        "email": "teste@teste.com",
+        "senha": "1"
+    },
+    {
+        "codigo": 2,
+        "email": "aeda@cesa.school",
+        "senha": "2"
+    }
+]
