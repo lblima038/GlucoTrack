@@ -1,0 +1,13 @@
+[
+    {
+        "codigo": 1,
+        "codigo_usuario": 1,
+        "nome": "Ivo Caetano",
+        "diaNascimento": 26,
+        "mesNascimento": 12,
+        "anoNascimento": 1965,
+        "sexo": "M",
+        "peso": 76.0,
+        "altura": 166.0
+    }
+]

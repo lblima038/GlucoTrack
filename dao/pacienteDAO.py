@@ -66,7 +66,9 @@ class PacienteDAO:
             if paciente['codigo_usuario'] == codigo_usuario:
                 return Paciente(paciente['codigo'], paciente['codigo_usuario'], paciente['nome'], paciente['diaNascimento'], paciente['mesNascimento'], paciente['anoNascimento'], paciente['sexo'], paciente['peso'], paciente['altura'])
         return None
-
+    
+    # atualiza um objeto paciente no banco
+    # se não encontrar devolve -1
     def atualizar(self, paciente):
         pacientes = self._ler_todos()
         for r in pacientes:
@@ -81,11 +83,14 @@ class PacienteDAO:
                 break
         self._grava_todos(pacientes)
 
+    # remove um paciente do banco a partir do codigo especificado
     def apagar(self, codigo):
         pacientes = self._ler_todos()
         pacientes = [paciente for paciente in pacientes if paciente['codigo'] != codigo]
         self._grava_todos(pacientes)
 
+    # fecha a tabela do banco.
+    # em base de dados em arquivos, nao faz nada. Mantida para uso futuro em bases que nao forem baseadas em arquivos
     def fechar(self):
         return
     
