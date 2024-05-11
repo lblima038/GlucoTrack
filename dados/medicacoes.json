@@ -2,7 +2,7 @@
     {
         "codigo": 1,
         "codigo_paciente": 1,
-        "nome": "Dipirona 500mg",
+        "nome": "Dipirona",
         "hora_inicial": "8:00",
         "periodo": 6,
         "lembrar": "S"
