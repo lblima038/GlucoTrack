@@ -66,7 +66,10 @@ class MedicacaoDAO:
                 
         return medicacoes_do_paciente
 
+    # atualiza um objeto medicacao no banco
+    # se não encontrar devolve -1
     def atualizar(self, medicacao):
+        encontrou = 1
         medicacoes = self._ler_todos()
         for r in medicacoes:
             if r['codigo'] == medicacao.codigo:
@@ -74,14 +77,19 @@ class MedicacaoDAO:
                 r['hora_inicial'] = medicacao.hora_inicial
                 r['periodo'] = medicacao.periodo
                 r['lembrar'] = medicacao.lembrar
+                encontrou = 1
                 break
         self._grava_todos(medicacoes)
+        return encontrou
 
+    # remove uma medicacao do banco a partir do codigo especificado
     def apagar(self, codigo):
         medicacoes = self._ler_todos()
         medicacoes = [medicacao for medicacao in medicacoes if medicacao['codigo'] != codigo]
         self._grava_todos(medicacoes)
 
+    # fecha a tabela do banco.
+    # em base de dados em arquivos, nao faz nada. Mantida para uso futuro em bases que nao forem baseadas em arquivos
     def fechar(self):
         return
     

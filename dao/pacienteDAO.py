@@ -52,6 +52,8 @@ class PacienteDAO:
         return paciente_dic['codigo']
 
     # faz uma busca no arquivo pelo paciente com o codigo especificado
+    # se encontrar devole o objeto encontrado
+    # se não encontrar devolve None
     def buscar_por_codigo(self, codigo):
         pacientes = self._ler_todos()
         for paciente in pacientes:
@@ -70,7 +72,10 @@ class PacienteDAO:
     # atualiza um objeto paciente no banco
     # se não encontrar devolve -1
     def atualizar(self, paciente):
+        encontrou = -1
+        # carrega todos os registro do banco numa lista
         pacientes = self._ler_todos()
+        # percorre a lsita a procura do paciente com o codigo fornecido
         for r in pacientes:
             if r['codigo'] == paciente.codigo:
                 r['nome'] = paciente.nome
@@ -80,13 +85,19 @@ class PacienteDAO:
                 r['sexo'] = paciente.sexo
                 r['peso'] = paciente.peso
                 r['altura'] = paciente.altura
+                encontrou = 1
                 break
         self._grava_todos(pacientes)
+        # retorno 1 se atualizou com sucesso ou -1 se não encontrou o registro
+        return encontrou
 
     # remove um paciente do banco a partir do codigo especificado
     def apagar(self, codigo):
+        # carrega todos os registros do banco de daos para uma lista
         pacientes = self._ler_todos()
+        # percorre toda a lista removendo o paciente com o codigo especificado
         pacientes = [paciente for paciente in pacientes if paciente['codigo'] != codigo]
+        # grava lista no banco de dados
         self._grava_todos(pacientes)
 
     # fecha a tabela do banco.
