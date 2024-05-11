@@ -3,18 +3,37 @@ from entidades.paciente import Paciente
 from entidades.medicacao import Medicacao
 from dao.usuarioDAO import UsuarioDAO
 from dao.pacienteDAO import PacienteDAO
-from dao.medicaoDAO import MedicacaoDAO
+from dao.medicacaoDAO import MedicacaoDAO
+from datetime import datetime
 import os
 
-def tela_usuario_logado():
+def cadastrar_glicemia():
     limpa_tela()
     nome_sistema()
-    menu_logado()
+    input("funcionalidade ainda não implementada")
+
+def listar_medicacoes(codigo_paciente):
+    limpa_tela()
+    nome_sistema()
+
+    pacienteDAO = PacienteDAO()
+    medicacaoDAO = MedicacaoDAO()
+    paciente = pacienteDAO.buscar_por_codigo(codigo_paciente)
+    medicacoes = medicacaoDAO.buscar_por_codigo_paciente(codigo_paciente)
+    print("")
+    print("Paciente: ", paciente.nome)
+    for m in medicacoes:
+        print("========================================")
+        print("Nome do remédio: ", m.nome)
+        print("Hora inicial: ", m.hora_inicial)
+        print("Periodicidade (horas): ", m.periodo)
+        print("Lembrar: ", m.lembrar)
+    print("========================================")
+    input("")
 
 def cadastrar_medicacoes(codigo_paciente):
     limpa_tela()
     nome_sistema()
-    print("")
 
     medicacaoDAO = MedicacaoDAO()
 
@@ -23,8 +42,8 @@ def cadastrar_medicacoes(codigo_paciente):
     periodo = int(input("De quantas em quantas horas?: "))
     lembrar = str(input("Lembrar ? (S/N): "))
 
-    medicao = Medicacao(None, codigo_paciente, nome, hora_inicial, periodo, lembrar)
-    codigo = medicacaoDAO.inserir(medicao)
+    medicacao = Medicacao(None, codigo_paciente, nome, hora_inicial, periodo, lembrar)
+    codigo = medicacaoDAO.inserir(medicacao)
     if codigo > 0:
         print("Medicacão incluida com sucesso!")
         input("")
@@ -41,11 +60,18 @@ def cadastrar_paciente(codigo_usuario):
     nome = str(input("Nome: "))
     peso = float(input("Peso (kg): "))
     altura = float(input("Altura (cm): "))
-    nascimento = str(input("Data nascimento (dd/mm/aaaa): "))
-    paciente = Paciente(None, codigo_usuario, nome, 0, 0, 0, "M", peso, altura)
-    pacienteDAO.inserir(paciente)
+    nascimento = input("Data nascimento (dd/mm/aaaa): ")
+    nasc = datetime.strptime(nascimento, '%d/%m/%Y')
+    dia = nasc.day
+    mes = nasc.month
+    ano = nasc.year
+    sexo = input("Sexo (M/F): ")
+
+    paciente = Paciente(None, codigo_usuario, nome, dia, mes, ano, sexo, peso, altura)
+    codigo_paciente = pacienteDAO.inserir(paciente)
     print("")
     input("Cadastro efetuado com sucesso")
+    return codigo_paciente
 
 def logar_usuario():
 
@@ -62,8 +88,7 @@ def logar_usuario():
         input("email ou senha inválidos")
     else:
         print("")
-        print("Usuario ", codigo, " autenticado com sucesso")
-        input("")
+        input("Usuario autenticado com sucesso")        
 
     return codigo
 
@@ -92,30 +117,10 @@ def cadastrar_usuario():
         print("Usuário cadastrado com sucesso!")
         input("Pressione qualquer tecla para voltar")
 
-def nome_sistema():
-    print("==============================================================================")
-    print("======================== GlucoTrack - Versão 1.0 =============================")
-    print("")
-
-def menu_inicial():
-    print("1  - Cadastrar-se no sistema")
-    print("2  - Entrar no sistema")
-    print("99 - Finalizar")
-    print("")
-
-def menu_logado():
-    print("3  - Cadastrar medicações")
-    print("4  - Registrar Glicemia")
-    print("99 - Finalizar")
-    print("")
-
 def escolha(codigo_usuario):
     opcao = int(input("Opção: "))
-    match (opcao):
+    match(opcao):
         case 1:
-            cadastrar_usuario()
-
-        case 2:
             # Tentar logar no sistema
             codigo_usuario = logar_usuario()
             if codigo_usuario > 0:
@@ -125,12 +130,24 @@ def escolha(codigo_usuario):
                 paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
                 if paciente != None:
                     # paciente já registrado
-                    tela_usuario_logado()
+                    tela_usuario_logado(paciente.codigo_usuario)
                     escolha(paciente.codigo_usuario)
                 else:
+                    limpa_tela()
+                    nome_sistema()
+                    print("Seja bem vindo ao GlucoTrack !")
+                    print("")
+                    print("Por favor, na próxima tela cadastre seus dados para que possamos montar seu perfil")
+                    print("e, com isto, fazermos um acompanhamento suas medicações,  nível glicêmico, dieta e ")
+                    print("saúde física.")
+                    print("")
+                    input("")
                     cadastrar_paciente(codigo_usuario)
-                    tela_usuario_logado()
+                    tela_usuario_logado(codigo_usuario)
                     escolha(codigo_usuario)
+
+        case 2:
+            cadastrar_usuario()
 
         case 3:
             pacienteDAO = PacienteDAO()
@@ -139,9 +156,50 @@ def escolha(codigo_usuario):
             tela_usuario_logado()
             escolha(codigo_usuario)
 
+        case 4:
+            pacienteDAO = PacienteDAO()
+            paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
+            listar_medicacoes(paciente.codigo)
+            tela_usuario_logado(paciente.codigo)
+            escolha(codigo_usuario)
+
+        case 5:
+            pacienteDAO = PacienteDAO()
+            paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
+            cadastrar_glicemia(paciente.codigo)
+            tela_usuario_logado(paciente.codigo_usuario)
+            escolha(codigo_usuario)
+
         case 99:
             exit()
 
+def tela_usuario_logado(codigo_usuario):
+    limpa_tela()
+    nome_sistema()
+    menu_logado(codigo_usuario)
+
+def menu_inicial():
+    print("1  - Entrar no sistema")
+    print("2  - Cadastrar-se no sistema")
+    print("99 - Finalizar")
+    print("")
+
+def menu_logado(codigo_usuario):
+    pacienteDAO = PacienteDAO()
+    paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
+    print(paciente.nome)
+    print("===================================")
+    print("3  - Cadastrar medicações")
+    print("4  - Listar medicações")
+    print("5  - Cadastrar glicemia")
+    print("6  - Listar glicemia")
+    print("99 - Finalizar")
+    print("")
+
+def nome_sistema():
+    print("==============================================================================")
+    print("======================== GlucoTrack - Versão 1.0 =============================")
+    print("")
 
 def limpa_tela():
     os.system('cls')
@@ -156,47 +214,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-
-
-
-
-# Criar uma instância do DAO
-#usuarioDAO = UsuarioDAO()
-#pacienteDAO = PacienteDAO()
-
-# Criar uma nova tarefa
-#usuario = Usuario(None, "fernando@gmail.com", "42drer")
-#codigo_usuario = usuarioDAO.inserir(usuario)
-#if codigo_usuario == -1:
-#    print("Já existe usuário cadastrado com o mesmo email")
-#else:
-#    paciente = Paciente(None, codigo_usuario, "Fernando Jose", 26, 12, 1965, 'M', 78, 166)
-#    codigo_paciente = pacienteDAO.inserir(paciente)
-#    if codigo_paciente == -1:
-#        print("Já existe paciente associado ao mesmo usuario")
-
-#print("fim")
-
-
-
-
-#if codigo_usuario != -1:
-#    print("Usuario criado com ID:", codigo_usuario)
-    # Ler um usuario
-#    usuario = usuarioDAO.buscar(codigo_usuario)
-#    print("Usuário lido:", usuario.email, "-", usuario.senha)
-
-    # Atualizar um usuario
-#    usuario.senha = "4567"
-#    usuarioDAO.atualizar(usuario)
-#    print("Usuário atualizado")
-#    usuarios = usuarioDAO._ler_usuarios()
-#    print(usuarios)
-
-    # Deletar uma usuario
- #   usuarioDAO.apagar(codigo_usuario)
- #   print("Usuário deletado")
-#else:
-#    print("Usuário já existe")
-# Fechar a conexão com o banco de dados
-#usuarioDAO.fechar()

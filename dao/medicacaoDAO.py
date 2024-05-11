@@ -36,10 +36,6 @@ class MedicacaoDAO:
             return -2
         
         medicacoes = self._ler_todos()
-        # verifica se existe medicacao com o mesmo codigo de usuario.
-        for r in medicacoes:
-            if r['codigo_paciente'] == medicacao.codigo_paciente:
-                return -1
         
         proximo_codigo = 0
         for r in medicacoes:
@@ -56,16 +52,19 @@ class MedicacaoDAO:
         medicacoes = self._ler_todos()
         for medicacao in medicacoes:
             if medicacao['codigo'] == codigo:
-                return medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
+                return Medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
         return None
 
     # faz uma busca no arquivo pelo medicacao com o codigo especificado
     def buscar_por_codigo_paciente(self, codigo_paciente):
         medicacoes = self._ler_todos()
+        medicacoes_do_paciente = []
         for medicacao in medicacoes:
             if medicacao['codigo_paciente'] == codigo_paciente:
-                return medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
-        return None
+                medicacao_do_paciente = Medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
+                medicacoes_do_paciente.append(medicacao_do_paciente)
+                
+        return medicacoes_do_paciente
 
     def atualizar(self, medicacao):
         medicacoes = self._ler_todos()

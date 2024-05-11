@@ -6,7 +6,12 @@
     },
     {
         "codigo": 2,
-        "email": "aeda@cesa.school",
+        "email": "aeda@cesar.school",
         "senha": "2"
+    },
+    {
+        "codigo": 3,
+        "email": "teste2@teste.com",
+        "senha": "1"
     }
 ]

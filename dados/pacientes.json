@@ -2,23 +2,34 @@
     {
         "codigo": 1,
         "codigo_usuario": 1,
-        "nome": "Jo\u00e3o Jose da Silva",
-        "diaNascimento": 0,
-        "mesNascimento": 0,
-        "anoNascimento": 0,
+        "nome": "Ivo Caetano de Andrade Junior",
+        "diaNascimento": 26,
+        "mesNascimento": 12,
+        "anoNascimento": 1965,
         "sexo": "M",
-        "peso": 80.0,
-        "altura": 177.0
+        "peso": 77.0,
+        "altura": 166.0
     },
     {
         "codigo": 2,
         "codigo_usuario": 2,
-        "nome": "Aeda da Silva",
-        "diaNascimento": 0,
-        "mesNascimento": 0,
-        "anoNascimento": 0,
-        "sexo": "M",
+        "nome": "Cibalena 300mg",
+        "diaNascimento": 1,
+        "mesNascimento": 1,
+        "anoNascimento": 2001,
+        "sexo": "F",
         "peso": 60.0,
-        "altura": 150.0
+        "altura": 150
+    },
+    {
+        "codigo": 3,
+        "codigo_usuario": 3,
+        "nome": "Jose de Souza Santos",
+        "diaNascimento": 1,
+        "mesNascimento": 1,
+        "anoNascimento": 2001,
+        "sexo": "M",
+        "peso": 77.0,
+        "altura": 177.0
     }
 ]
