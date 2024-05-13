@@ -6,7 +6,7 @@ import os
 class SexoDAO:
 
     # caminho para o arquivo de dados no computador
-    arquivo = 'dados/soxo.json'
+    arquivo = 'dados/sexo.json'
 
     # construtor da classe
     # se não existir o arquivo, cria um arquivo vazio
