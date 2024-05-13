@@ -1,0 +1,18 @@
+[
+    {
+        "codigo": 1,
+        "descricao": "Tipo 1"
+    },
+    {
+        "codigo": 2,
+        "descricao": "Tipo 2"
+    },
+    {
+        "codigo": 3,
+        "descricao": "Gestacional"
+    },
+    {
+        "codigo": 4,
+        "descricao": "Outros"
+    }
+]

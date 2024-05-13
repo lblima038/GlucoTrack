@@ -5,7 +5,7 @@ import os
 # classe DAO para manipulação de usuarios no banco de dados (arquivos)
 class UsuarioDAO:
 
-    # caminho para o arquivo de usuarios no computador
+    # caminho para o arquivo de dados no computador
     arquivo = 'dados/usuarios.json'
 
     # construtor da classe
@@ -95,5 +95,5 @@ class UsuarioDAO:
     # fecha a tabela do banco.
     # em base de dados em arquivos, nao faz nada. Mantida para uso futuro em bases que nao forem baseadas em arquivos
     def fechar(self):
-        return
+        pass
     

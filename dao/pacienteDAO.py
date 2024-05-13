@@ -5,7 +5,7 @@ import os
 # classe DAO para manipulação de pacientes no banco de dados (arquivos)
 class PacienteDAO:
 
-    # caminho para o arquivo de pacientes no computador
+    # caminho para o arquivo de dados no computador
     arquivo = 'dados/pacientes.json'
 
     # construtor da classe
@@ -46,7 +46,16 @@ class PacienteDAO:
             if r['codigo'] > proximo_codigo:
                 proximo_codigo = r['codigo']
             
-        paciente_dic = {'codigo': proximo_codigo + 1, 'codigo_usuario': paciente.codigo_usuario, 'nome': paciente.nome, 'diaNascimento': paciente.diaNascimento, 'mesNascimento': paciente.mesNascimento, 'anoNascimento': paciente.anoNascimento,'sexo': paciente.sexo, 'peso': paciente.peso, 'altura': paciente.altura}
+        paciente_dic = {'codigo': proximo_codigo + 1, 
+                        'codigo_usuario': paciente.codigo_usuario, 
+                        'nome': paciente.nome, 
+                        'diaNascimento': paciente.diaNascimento, 
+                        'mesNascimento': paciente.mesNascimento, 
+                        'anoNascimento': paciente.anoNascimento,
+                        'codigo_sexo': paciente.codigo_sexo, 
+                        'peso': paciente.peso, 
+                        'altura': paciente.altura,
+                        'codigo_diabete': paciente.codigo_diabete}
         pacientes.append(paciente_dic)
         self._grava_todos(pacientes)
         return paciente_dic['codigo']
@@ -58,7 +67,16 @@ class PacienteDAO:
         pacientes = self._ler_todos()
         for paciente in pacientes:
             if paciente['codigo'] == codigo:
-                return Paciente(paciente['codigo'], paciente['codigo_usuario'], paciente['nome'], paciente['diaNascimento'], paciente['mesNascimento'], paciente['anoNascimento'], paciente['sexo'], paciente['peso'], paciente['altura'])
+                return Paciente(paciente['codigo'], 
+                                paciente['codigo_usuario'], 
+                                paciente['nome'], 
+                                paciente['diaNascimento'], 
+                                paciente['mesNascimento'], 
+                                paciente['anoNascimento'], 
+                                paciente['codigo_sexo'], 
+                                paciente['peso'], 
+                                paciente['altura'],
+                                paciente['codigo_diabete'])
         return None
 
     # faz uma busca no arquivo pelo paciente com o codigo especificado
@@ -66,7 +84,16 @@ class PacienteDAO:
         pacientes = self._ler_todos()
         for paciente in pacientes:
             if paciente['codigo_usuario'] == codigo_usuario:
-                return Paciente(paciente['codigo'], paciente['codigo_usuario'], paciente['nome'], paciente['diaNascimento'], paciente['mesNascimento'], paciente['anoNascimento'], paciente['sexo'], paciente['peso'], paciente['altura'])
+                return Paciente(paciente['codigo'], 
+                                paciente['codigo_usuario'], 
+                                paciente['nome'], 
+                                paciente['diaNascimento'], 
+                                paciente['mesNascimento'], 
+                                paciente['anoNascimento'], 
+                                paciente['codigo_sexo'], 
+                                paciente['peso'], 
+                                paciente['altura'],
+                                paciente['codigo_diabete'])
         return None
     
     # atualiza um objeto paciente no banco
@@ -82,9 +109,10 @@ class PacienteDAO:
                 r['diaNascimento'] = paciente.diaNascimento
                 r['mesNascimento'] = paciente.mesNascimento
                 r['anoNascimento'] = paciente.anoNascimento
-                r['sexo'] = paciente.sexo
+                r['codigo_sexo'] = paciente.codigo_sexo
                 r['peso'] = paciente.peso
                 r['altura'] = paciente.altura
+                r['codigo_diabete'] = paciente.codigo_diabete
                 encontrou = 1
                 break
         self._grava_todos(pacientes)
@@ -103,5 +131,5 @@ class PacienteDAO:
     # fecha a tabela do banco.
     # em base de dados em arquivos, nao faz nada. Mantida para uso futuro em bases que nao forem baseadas em arquivos
     def fechar(self):
-        return
+        pass
     

@@ -2,12 +2,37 @@
     {
         "codigo": 1,
         "codigo_usuario": 1,
-        "nome": "Ivo Caetano",
+        "nome": "ivo caetano de andrade junior",
         "diaNascimento": 26,
         "mesNascimento": 12,
         "anoNascimento": 1965,
-        "sexo": "M",
-        "peso": 76.0,
-        "altura": 166.0
+        "codigo_sexo": "2",
+        "peso": 77.0,
+        "altura": 166.0,
+        "codigo_diabete": "1"
+    },
+    {
+        "codigo": 2,
+        "codigo_usuario": 2,
+        "nome": "Aeda da Silva",
+        "diaNascimento": 1,
+        "mesNascimento": 1,
+        "anoNascimento": 2000,
+        "codigo_sexo": "1",
+        "peso": 57.0,
+        "altura": 156.0,
+        "codigo_diabete": "2"
+    },
+    {
+        "codigo": 3,
+        "codigo_usuario": 3,
+        "nome": "teste teste teste teste",
+        "diaNascimento": 25,
+        "mesNascimento": 5,
+        "anoNascimento": 2001,
+        "codigo_sexo": "1",
+        "peso": 44.0,
+        "altura": 333.0,
+        "codigo_diabete": "3"
     }
 ]

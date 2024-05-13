@@ -3,10 +3,10 @@ import json
 import os
 
 # classe DAO para manipulação de medicacoes no banco de dados (arquivos)
-class MedicacaoDAO:
+class RegistroNutricionalDAO:
 
     # caminho para o arquivo de dados no computador
-    arquivo = 'dados/medicacoes.json'
+    arquivo = 'dados/registro_nutricional.json'
 
     # construtor da classe
     # se não existir o arquivo, cria um arquivo vazio
