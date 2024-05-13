@@ -12,9 +12,9 @@ class SexoDAO:
     # se não existir o arquivo, cria um arquivo vazio
     def __init__(self):
         if not os.path.exists(self.arquivo):
-            tipos = [ { "codigo": 1, "descricao": "Feminino" },
-                      { "codigo": 2, "descricao": "Masculino" },
-                      { "codigo": 3, "descricao": "Não especificado" }]
+            tipos = [ { "codigo": "F", "descricao": "Feminino" },
+                      { "codigo": "M", "descricao": "Masculino" },
+                      { "codigo": "N", "descricao": "Não especificado" }]
 
             with open(self.arquivo, 'w') as f:
                 json.dump([], f)

@@ -6,7 +6,7 @@
         "diaNascimento": 26,
         "mesNascimento": 12,
         "anoNascimento": 2001,
-        "codigo_sexo": "2",
+        "codigo_sexo": "M",
         "peso": 77.0,
         "altura": 166.0,
         "codigo_diabete": "1"
@@ -18,7 +18,7 @@
         "diaNascimento": 1,
         "mesNascimento": 1,
         "anoNascimento": 2000,
-        "codigo_sexo": "1",
+        "codigo_sexo": "F",
         "peso": 57.0,
         "altura": 156.0,
         "codigo_diabete": "2"
@@ -30,7 +30,7 @@
         "diaNascimento": 25,
         "mesNascimento": 5,
         "anoNascimento": 2001,
-        "codigo_sexo": "1",
+        "codigo_sexo": "F",
         "peso": 44.0,
         "altura": 333.0,
         "codigo_diabete": "3"
