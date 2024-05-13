@@ -29,7 +29,7 @@ def listar_glicemia(codigo_paciente):
     print("Paciente: ", paciente.nome)
     for m in glicemias:
         print("========================================")
-        print("Data: ", m.dia, "/", m.mes, "/", m.ano)
+        print("Data: {:02d}/{:02d}/{:04d}".format(m.dia, m.mes, m.ano))
         print("Valor: ", m.valor)
     print("========================================")
     input("")
