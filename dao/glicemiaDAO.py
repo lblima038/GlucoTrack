@@ -29,7 +29,7 @@ class GlicemiaDAO:
 
     # insere um registro no arquivo.
     # devolve o código se gravou com sucesso.
-    # devolve -1 se registropesquisadonaocontemocodigo dopaciente
+    # devolve -1 se registro pesquisado nao contem o codigo do paciente
     def inserir(self, glicemia):
         # valida se o campo codigo_paciente está preenchindo
         if glicemia.codigo_paciente == None:

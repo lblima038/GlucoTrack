@@ -1,21 +1,64 @@
 from dao.sexoDAO import SexoDAO
 from entidades.usuario import Usuario
 from dao.usuarioDAO import UsuarioDAO
-
 from entidades.paciente import Paciente
 from dao.pacienteDAO import PacienteDAO
-
 from entidades.medicacao import Medicacao
 from dao.medicacaoDAO import MedicacaoDAO
-
 from entidades.tipo_diabete import TipoDiabete
 from dao.tipoDiabeteDAO import TipoDiabeteDAO
-
 from entidades.glicemia import Glicemia
 from dao.glicemiaDAO import GlicemiaDAO
+from entidades.registro_nutricional import RegistroNutricional
+from dao.registroNutricionalDAO import RegistroNutricionalDAO
 
 from datetime import datetime
 import os
+
+def listar_registros_nutricionais(codigo_paciente):
+    limpa_tela()
+    nome_sistema()
+
+    pacienteDAO = PacienteDAO()
+    registroNutricionalDAO = RegistroNutricionalDAO()
+    paciente = pacienteDAO.buscar_por_codigo(codigo_paciente)
+    registros_nutricionais = registroNutricionalDAO.buscar_por_codigo_paciente(codigo_paciente)
+    print("")
+    print("Paciente: ", paciente.nome)
+    for m in registros_nutricionais:
+        print("========================================")
+        print("Data: {:02d}/{:02d}/{:04d}".format(m.dia, m.mes, m.ano))
+        print("Calorias: ", m.calorias)
+        print("Proteinas: ", m.proteinas)
+        print("Gorduras: ", m.gorduras)
+        print("Carboidratos: ", m.carboidratos)
+    print("========================================")
+    input("")
+
+def cadastrar_registro_nutricional(codigo_paciente):
+    limpa_tela()
+    nome_sistema()
+
+    registroNutricionalDAO = RegistroNutricionalDAO()
+
+    data = input("Data (dd/mm/aaaa): ")
+    nasc = datetime.strptime(data, '%d/%m/%Y')
+    dia = nasc.day
+    mes = nasc.month
+    ano = nasc.year
+
+    calorias = int(input("Calorias: "))
+    proteinas = int(input("Proteinas: "))
+    gorduras = int(input("Gorduras: "))
+    carboidratos = int(input("Carboidratos: "))
+
+    registro_nutricional = RegistroNutricional(None, codigo_paciente, dia, mes, ano, gorduras, proteinas, gorduras, carboidratos)
+    codigo = registroNutricionalDAO.inserir(registro_nutricional)
+    if codigo > 0:
+        print("Registro nutricional incluido com sucesso!")
+        input("")
+    else:
+        input("Erro na inclusão do registro nutricional")
 
 def listar_glicemia(codigo_paciente):
     limpa_tela()
@@ -186,6 +229,7 @@ def tela_usuario_logado(codigo_usuario):
 def escolha(codigo_usuario):
     opcao = int(input("Opção: "))
     match(opcao):
+        # cadastrar medicacoes
         case 1:
             pacienteDAO = PacienteDAO()
             paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
@@ -193,6 +237,7 @@ def escolha(codigo_usuario):
             tela_usuario_logado(codigo_usuario)
             escolha(codigo_usuario)
 
+        # listar medicacoes
         case 2:
             pacienteDAO = PacienteDAO()
             paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
@@ -200,6 +245,7 @@ def escolha(codigo_usuario):
             tela_usuario_logado(paciente.codigo)
             escolha(codigo_usuario)
 
+        # cadastrar glicemia
         case 3:
             pacienteDAO = PacienteDAO()
             paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
@@ -207,10 +253,27 @@ def escolha(codigo_usuario):
             tela_usuario_logado(paciente.codigo_usuario)
             escolha(codigo_usuario)
 
+        # lista glicemia
         case 4:
             pacienteDAO = PacienteDAO()
             paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
             listar_glicemia(paciente.codigo)
+            tela_usuario_logado(paciente.codigo_usuario)
+            escolha(codigo_usuario)
+
+        # cadastrar registro nutricional
+        case 5:
+            pacienteDAO = PacienteDAO()
+            paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
+            cadastrar_registro_nutricional(paciente.codigo)
+            tela_usuario_logado(paciente.codigo_usuario)
+            escolha(codigo_usuario)
+
+        # listar registros nutricionais
+        case 6:
+            pacienteDAO = PacienteDAO()
+            paciente = pacienteDAO.buscar_por_codigo_usuario(codigo_usuario)
+            listar_registros_nutricionais(paciente.codigo)
             tela_usuario_logado(paciente.codigo_usuario)
             escolha(codigo_usuario)
 
@@ -229,6 +292,8 @@ def menu_logado(codigo_usuario):
     print("2  - Listar medicações")
     print("3  - Cadastrar glicemia")
     print("4  - Listar glicemia")
+    print("5  - Cadastrar registro nutricional")
+    print("6  - Listar registros nutricionais")
     print("99 - Finalizar")
     print("")
 

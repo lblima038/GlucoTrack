@@ -1,9 +1,12 @@
 class RegistroNutricional:
 
-    def __init__(self, codigo, codigo_paciente, nome, hora_inicial, periodo, lembrar):
+    def __init__(self, codigo, codigo_paciente, dia, mes, ano, calorias, proteinas, gorduras, carboidratos):
         self.codigo = codigo
         self.codigo_paciente = codigo_paciente
-        self.nome = nome
-        self.hora_inicial = hora_inicial
-        self.periodo = periodo
-        self.lembrar = lembrar
+        self.dia = dia
+        self.mes = mes
+        self.ano = ano
+        self.calorias = calorias
+        self.proteinas = proteinas
+        self.gorduras = gorduras
+        self.carboidratos = carboidratos

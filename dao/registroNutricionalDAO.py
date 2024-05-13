@@ -1,12 +1,12 @@
-from entidades.medicacao import Medicacao
+from entidades.registro_nutricional import RegistroNutricional
 import json
 import os
 
-# classe DAO para manipulação de medicacoes no banco de dados (arquivos)
+# classe DAO para manipulação de registros nutricionais no banco de dados
 class RegistroNutricionalDAO:
 
     # caminho para o arquivo de dados no computador
-    arquivo = 'dados/registro_nutricional.json'
+    arquivo = 'dados/registros_nutricionais.json'
 
     # construtor da classe
     # se não existir o arquivo, cria um arquivo vazio
@@ -16,7 +16,7 @@ class RegistroNutricionalDAO:
                 json.dump([], f)
 
     # método de uso interno:
-    # carrega todos os registros do arquivo para a memória
+    # carrega todos os registros do arquivo
     def _ler_todos(self):
         with open(self.arquivo, 'r') as f:
             return json.load(f)
@@ -27,66 +27,77 @@ class RegistroNutricionalDAO:
         with open(self.arquivo, 'w') as f:
             json.dump(registros, f, indent=4)
 
-    # insere um medicacao no arquivo se não existir um medicacao para o mesmo usuario
-    # devolve o código do medicacao se gravou com sucesso.
-    # devolve -1 se já existir um medicacao para o mesmo usuario
-    def inserir(self, medicacao):
+    # insere um registro no arquivo.
+    # devolve o código se gravou com sucesso.
+    # devolve -1 se registro pesquisado nao contem o codigo do paciente
+    def inserir(self, registro_nutricional):
         # valida se o campo codigo_paciente está preenchindo
-        if medicacao.codigo_paciente == None:
+        if registro_nutricional.codigo_paciente == None:
             return -2
         
-        medicacoes = self._ler_todos()
+        registros_nutricionais = self._ler_todos()
         
         proximo_codigo = 0
-        for r in medicacoes:
+        for r in registros_nutricionais:
             if r['codigo'] > proximo_codigo:
                 proximo_codigo = r['codigo']
             
-        medicacao_dic = {'codigo': proximo_codigo + 1, 'codigo_paciente': medicacao.codigo_paciente, 'nome': medicacao.nome, 'hora_inicial': medicacao.hora_inicial, 'periodo': medicacao.periodo, 'lembrar': medicacao.lembrar}
-        medicacoes.append(medicacao_dic)
-        self._grava_todos(medicacoes)
-        return medicacao_dic['codigo']
+        registro_nutricional_dtc = {'codigo': proximo_codigo + 1, 
+                                    'codigo_paciente': registro_nutricional.codigo_paciente, 
+                                    'dia': registro_nutricional.dia, 
+                                    'mes': registro_nutricional.mes, 
+                                    'ano': registro_nutricional.ano, 
+                                    'calorias': registro_nutricional.calorias,
+                                    'proteinas': registro_nutricional.proteinas,
+                                    'gorduras': registro_nutricional.gorduras,
+                                    'carboidratos': registro_nutricional.carboidratos}
+        registros_nutricionais.append(registro_nutricional_dtc)
+        self._grava_todos(registros_nutricionais)
+        return registro_nutricional_dtc['codigo']
 
-    # faz uma busca no arquivo pelo medicacao com o codigo especificado
+    # faz uma busca do registro no arquivo pelo codigo especificado
     def buscar_por_codigo(self, codigo):
-        medicacoes = self._ler_todos()
-        for medicacao in medicacoes:
-            if medicacao['codigo'] == codigo:
-                return Medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
+        registros_nutricionais = self._ler_todos()
+        for registro in registros_nutricionais:
+            if registro['codigo'] == codigo:
+                return RegistroNutricional(registro['codigo'], registro['codigo_paciente'], registro['dia'], registro['mes'], registro['ano'], registro['calorias'], registro['proteinas'], registro['gorduras'], registro['carboidratos'])
         return None
 
-    # faz uma busca no arquivo pelo medicacao com o codigo especificado
+    # faz uma busca no arquivo pelo registro com o codigo dopaciente especificado
     def buscar_por_codigo_paciente(self, codigo_paciente):
-        medicacoes = self._ler_todos()
-        medicacoes_do_paciente = []
-        for medicacao in medicacoes:
-            if medicacao['codigo_paciente'] == codigo_paciente:
-                medicacao_do_paciente = Medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
-                medicacoes_do_paciente.append(medicacao_do_paciente)
+        registros = self._ler_todos()
+        registros_do_paciente = []
+        for r in registros:
+            if r['codigo_paciente'] == codigo_paciente:
+                registro_do_paciente = RegistroNutricional(r['codigo'], r['codigo_paciente'], r['dia'], r['mes'], r['ano'], r['calorias'], r['proteinas'], r['gorduras'], r['carboidratos'])
+                registros_do_paciente.append(registro_do_paciente)
                 
-        return medicacoes_do_paciente
+        return registros_do_paciente
 
-    # atualiza um objeto medicacao no banco
+    # atualiza um objeto no banco
     # se não encontrar devolve -1
-    def atualizar(self, medicacao):
+    def atualizar(self, registro_nutricional):
         encontrou = 1
-        medicacoes = self._ler_todos()
-        for r in medicacoes:
-            if r['codigo'] == medicacao.codigo:
-                r['nome'] = medicacao.nome
-                r['hora_inicial'] = medicacao.hora_inicial
-                r['periodo'] = medicacao.periodo
-                r['lembrar'] = medicacao.lembrar
+        registros_nutricionais = self._ler_todos()
+        for r in registros_nutricionais:
+            if r['codigo'] == registro_nutricional.codigo:
+                r['dia'] = registro_nutricional.dia
+                r['mes'] = registro_nutricional.mes
+                r['ano'] = registro_nutricional.ano
+                r['calorias'] = registro_nutricional.calorias
+                r['proteinas'] = registro_nutricional.proteinas
+                r['gorduras'] = registro_nutricional.gorduras
+                r['carboidratos'] = registro_nutricional.carboidratos
                 encontrou = 1
                 break
-        self._grava_todos(medicacoes)
+        self._grava_todos(registros_nutricionais)
         return encontrou
 
-    # remove uma medicacao do banco a partir do codigo especificado
+    # remove um registro do banco a partir do codigo especificado
     def apagar(self, codigo):
-        medicacoes = self._ler_todos()
-        medicacoes = [medicacao for medicacao in medicacoes if medicacao['codigo'] != codigo]
-        self._grava_todos(medicacoes)
+        registros_nutricionais = self._ler_todos()
+        registros_nutricionais = [registro_nutricional for registro_nutricional in registros_nutricionais if registro_nutricional['codigo'] != codigo]
+        self._grava_todos(registros_nutricionais)
 
     # fecha a tabela do banco.
     # em base de dados em arquivos, nao faz nada. Mantida para uso futuro em bases que nao forem baseadas em arquivos

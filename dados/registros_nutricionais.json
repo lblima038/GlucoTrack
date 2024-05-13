@@ -1,0 +1,13 @@
+[
+    {
+        "codigo": 1,
+        "codigo_paciente": 3,
+        "dia": 13,
+        "mes": 5,
+        "ano": 2024,
+        "calorias": 67,
+        "proteinas": 50,
+        "gorduras": 67,
+        "carboidratos": 45
+    }
+]
