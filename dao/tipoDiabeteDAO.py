@@ -6,7 +6,7 @@ import os
 class TipoDiabeteDAO:
 
     # caminho para o arquivo de dados no computador
-    arquivo = 'dados/tipos_diabetes.json'
+    arquivo = 'dados/tipos_diabete.json'
 
     # construtor da classe
     # se não existir o arquivo, cria um arquivo vazio
