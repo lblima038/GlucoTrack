@@ -4,11 +4,11 @@
         "descricao": "Feminino"
     },
     {
-        "codigo": "2",
+        "codigo": "M",
         "descricao": "Masculino"
     },
     {
-        "codigo": "3",
+        "codigo": "N",
         "descricao": "N\u00e3o especificado"
     }
 ]
