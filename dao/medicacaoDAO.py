@@ -2,7 +2,7 @@ from entidades.medicacao import Medicacao
 import json
 import os
 
-# classe DAO para manipulação de medicacoes no banco de dados (arquivos)
+# classe DAO para manipulação de medicacoes no banco de dados
 class MedicacaoDAO:
 
     # caminho para o arquivo de dados no computador
@@ -16,7 +16,7 @@ class MedicacaoDAO:
                 json.dump([], f)
 
     # método de uso interno:
-    # carrega todos os registros do arquivo para a memória
+    # carrega todos os registros do arquivo
     def _ler_todos(self):
         with open(self.arquivo, 'r') as f:
             return json.load(f)
@@ -27,13 +27,13 @@ class MedicacaoDAO:
         with open(self.arquivo, 'w') as f:
             json.dump(registros, f, indent=4)
 
-    # insere um medicacao no arquivo se não existir um medicacao para o mesmo usuario
-    # devolve o código do medicacao se gravou com sucesso.
-    # devolve -1 se já existir um medicacao para o mesmo usuario
+    # insere um registro no banco de dados
+    # devolve -1 se o registro a ser inserido nao tiver o código do paciente.
+    # devolve o codigo do registro se operacao comsucesso
     def inserir(self, medicacao):
         # valida se o campo codigo_paciente está preenchindo
         if medicacao.codigo_paciente == None:
-            return -2
+            return -1
         
         medicacoes = self._ler_todos()
         
@@ -47,7 +47,7 @@ class MedicacaoDAO:
         self._grava_todos(medicacoes)
         return medicacao_dic['codigo']
 
-    # faz uma busca no arquivo pelo medicacao com o codigo especificado
+    # faz uma busca do registro no arquivo pelo codigo especificado
     def buscar_por_codigo(self, codigo):
         medicacoes = self._ler_todos()
         for medicacao in medicacoes:
@@ -55,7 +55,7 @@ class MedicacaoDAO:
                 return Medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
         return None
 
-    # faz uma busca no arquivo pelo medicacao com o codigo especificado
+    # faz uma busca no arquivo pelo registro com o codigo dopaciente especificado
     def buscar_por_codigo_paciente(self, codigo_paciente):
         medicacoes = self._ler_todos()
         medicacoes_do_paciente = []
@@ -66,7 +66,7 @@ class MedicacaoDAO:
                 
         return medicacoes_do_paciente
 
-    # atualiza um objeto medicacao no banco
+    # atualiza um objeto no banco
     # se não encontrar devolve -1
     def atualizar(self, medicacao):
         encontrou = 1
@@ -82,7 +82,7 @@ class MedicacaoDAO:
         self._grava_todos(medicacoes)
         return encontrou
 
-    # remove uma medicacao do banco a partir do codigo especificado
+    # remove um registro do banco a partir do codigo especificado
     def apagar(self, codigo):
         medicacoes = self._ler_todos()
         medicacoes = [medicacao for medicacao in medicacoes if medicacao['codigo'] != codigo]

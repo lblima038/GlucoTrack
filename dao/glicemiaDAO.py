@@ -2,7 +2,7 @@ from entidades.glicemia import Glicemia
 import json
 import os
 
-# classe DAO para manipulação de medicacoes no banco de dados (arquivos)
+# classe DAO para manipulação de registros de glicemia no banco de dados
 class GlicemiaDAO:
 
     # caminho para o arquivo de dados no computador
@@ -16,7 +16,7 @@ class GlicemiaDAO:
                 json.dump([], f)
 
     # método de uso interno:
-    # carrega todos os registros do arquivo para a memória
+    # carrega todos os registros do arquivo
     def _ler_todos(self):
         with open(self.arquivo, 'r') as f:
             return json.load(f)
@@ -27,12 +27,13 @@ class GlicemiaDAO:
         with open(self.arquivo, 'w') as f:
             json.dump(registros, f, indent=4)
 
-    # insere um registro de glicemia no arquivo.
-    # devolve o código do medicacao se gravou com sucesso.
+    # insere um registro no arquivo.
+    # devolve o código se gravou com sucesso.
+    # devolve -1 se registropesquisadonaocontemocodigo dopaciente
     def inserir(self, glicemia):
         # valida se o campo codigo_paciente está preenchindo
         if glicemia.codigo_paciente == None:
-            return -2
+            return -1
         
         glicemias = self._ler_todos()
         
@@ -46,7 +47,7 @@ class GlicemiaDAO:
         self._grava_todos(glicemias)
         return glicemia_dic['codigo']
 
-    # faz uma busca no arquivo pela glicemia com o codigo especificado
+    # faz uma busca do registro no arquivo pelo codigo especificado
     def buscar_por_codigo(self, codigo):
         glicemias = self._ler_todos()
         for glicemia in glicemias:
@@ -54,7 +55,7 @@ class GlicemiaDAO:
                 return Glicemia(glicemia['codigo'], glicemia['codigo_paciente'], glicemia['dia'], glicemia['mes'], glicemia['ano'], glicemia['valor'])
         return None
 
-    # faz uma busca no arquivo pelo medicacao com o codigo especificado
+    # faz uma busca no arquivo pelo registro com o codigo dopaciente especificado
     def buscar_por_codigo_paciente(self, codigo_paciente):
         glicemias = self._ler_todos()
         glicemias_do_paciente = []
@@ -65,7 +66,7 @@ class GlicemiaDAO:
                 
         return glicemias_do_paciente
 
-    # atualiza um objeto medicacao no banco
+    # atualiza um objeto no banco
     # se não encontrar devolve -1
     def atualizar(self, glicemia):
         encontrou = 1
@@ -82,7 +83,7 @@ class GlicemiaDAO:
         self._grava_todos(glicemias)
         return encontrou
 
-    # remove uma medicacao do banco a partir do codigo especificado
+    # remove um registro do banco a partir do codigo especificado
     def apagar(self, codigo):
         glicemias = self._ler_todos()
         glicemias = [glicemia for glicemia in glicemias if glicemia['codigo'] != codigo]
@@ -91,11 +92,11 @@ class GlicemiaDAO:
     # retorna um array com todos os registros do banco
     def listar_todos(self):
         glicemias_bd = self._ler_todos()
-        gligemias = []
+        glicemias = []
         for reg in glicemias_bd:
             glicemia = Glicemia(reg['codigo'], reg['codigo_paciente'], reg['dia'], reg['mes'], reg['ano'], reg['valor'])
-            gligemias.append(glicemia)
-        return gligemias
+            glicemias.append(glicemia)
+        return glicemias
 
     # fecha a tabela do banco.
     # em base de dados em arquivos, nao faz nada. Mantida para uso futuro em bases que nao forem baseadas em arquivos
