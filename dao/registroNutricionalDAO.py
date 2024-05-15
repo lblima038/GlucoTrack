@@ -103,4 +103,3 @@ class RegistroNutricionalDAO:
     # em base de dados em arquivos, nao faz nada. Mantida para uso futuro em bases que nao forem baseadas em arquivos
     def fechar(self):
         pass
-    
