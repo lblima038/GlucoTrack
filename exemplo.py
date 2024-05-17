@@ -53,7 +53,7 @@ def cadastrar_registro_nutricional(codigo_paciente):
     carboidratos = int(input("Carboidratos: "))
 
     registro_nutricional = RegistroNutricional(None, codigo_paciente, dia, mes, ano, gorduras, proteinas, gorduras, carboidratos)
-    codigo = registroNutricionalDAO.inserir(registro_nutricional)
+    codigo = registroNutricionalDAO.inserirPorObjeto(registro_nutricional)
     if codigo > 0:
         print("Registro nutricional incluido com sucesso!")
         input("")
@@ -92,7 +92,7 @@ def cadastrar_glicemia(codigo_paciente):
     valor = int(input("Valor: "))
 
     glicemia = Glicemia(None, codigo_paciente, dia, mes, ano, valor)
-    codigo = glicemiaDAO.inserir(glicemia)
+    codigo = glicemiaDAO.inserirPorObjeto(glicemia)
     if codigo > 0:
         print("Glicemia incluida com sucesso!")
         input("")
@@ -130,7 +130,7 @@ def cadastrar_medicacoes(codigo_paciente):
     lembrar = str(input("Lembrar ? (S/N): "))
 
     medicacao = Medicacao(None, codigo_paciente, nome, hora_inicial, periodo, lembrar)
-    codigo = medicacaoDAO.inserir(medicacao)
+    codigo = medicacaoDAO.inserirPorOPbjeto(medicacao)
     if codigo > 0:
         print("Medicacão incluida com sucesso!")
         input("")
@@ -172,7 +172,7 @@ def cadastrar_paciente(codigo_usuario):
     codigo_sexo = input("Informe seu sexo: ")
 
     paciente = Paciente(None, codigo_usuario, nome, dia, mes, ano, codigo_sexo, peso, altura, codigo_diabete)
-    codigo_paciente = pacienteDAO.inserir(paciente)
+    codigo_paciente = pacienteDAO.inserirPorObjeto(paciente)
     print("")
     input("Cadastro efetuado com sucesso")
     return codigo_paciente
@@ -210,7 +210,7 @@ def cadastrar_usuario():
 
     usuario = Usuario(None, email, senha)
 
-    codigo_usuario = usuarioDAO.inserir(usuario)
+    codigo_usuario = usuarioDAO.inserirPorObjeto(usuario)
     if codigo_usuario == -1:
         print("")
         print("Já existe um usuário com este email")
