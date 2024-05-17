@@ -17,5 +17,6 @@ def cadastrar_glicemia(codigo_paciente):
     #
     
     glicemiaDAO = GlicemiaDAO()
-    glicemiaDAO.inserir(codigo_paciente, dia, mes, ano, valor)
+    glicemiaDAO.inserirPorDados(codigo_paciente, dia, mes, ano, valor)
 
+cadastrar_glicemia(1)
