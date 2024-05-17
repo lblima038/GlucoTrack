@@ -6,5 +6,13 @@
         "mes": 5,
         "ano": 2024,
         "valor": 67
+    },
+    {
+        "codigo": 2,
+        "codigo_paciente": 1,
+        "dia": 17,
+        "mes": 5,
+        "ano": 2024,
+        "valor": 220
     }
 ]
