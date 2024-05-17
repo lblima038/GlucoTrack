@@ -12,25 +12,29 @@ class RegistroNutricionalDAO:
     # se não existir o arquivo, cria um arquivo vazio
     def __init__(self):
         if not os.path.exists(self.arquivo):
-            with open(self.arquivo, 'w') as f:
-                json.dump([], f)
+            f = open(self.arquivo, 'w')
+            json.dump([], f)
 
     # método de uso interno:
     # carrega todos os registros do arquivo
     def _ler_todos(self):
-        with open(self.arquivo, 'r') as f:
-            return json.load(f)
+        f = open(self.arquivo, 'r')
+        return json.load(f)
 
     # método de uso interno:
     # grava todos os registos para o arquivo
     def _grava_todos(self, registros):
-        with open(self.arquivo, 'w') as f:
-            json.dump(registros, f, indent=4)
+        f =  open(self.arquivo, 'w')
+        json.dump(registros, f, indent=4)
+
+    def inserirPorDados(self, codigo_paciente, dia, mes, ano, calorias, proteinas, gorduras, carboidratos):
+        registro_nutricional = RegistroNutricional(codigo_paciente, dia, mes, ano, calorias, proteinas, gorduras, carboidratos)
+        return self.inserirPorObjeto(registro_nutricional)
 
     # insere um registro no arquivo.
     # devolve o código se gravou com sucesso.
     # devolve -1 se registro pesquisado nao contem o codigo do paciente
-    def inserir(self, registro_nutricional):
+    def inserirPorObjeto(self, registro_nutricional):
         # valida se o campo codigo_paciente está preenchindo
         if registro_nutricional.codigo_paciente == None:
             return -2

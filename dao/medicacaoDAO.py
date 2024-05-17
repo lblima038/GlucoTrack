@@ -24,13 +24,17 @@ class MedicacaoDAO:
     # método de uso interno:
     # grava todos os registos para o arquivo
     def _grava_todos(self, registros):
-        with open(self.arquivo, 'w') as f:
-            json.dump(registros, f, indent=4)
+        f = open(self.arquivo, 'w')
+        json.dump(registros, f, indent=4)
 
+    def inserirPorDados(self, codigo_paciente, nome, hora_inical, periodo, lembrar):
+        medicacao = Medicacao(None, codigo_paciente, nome, hora_inical, periodo, lembrar)
+        return self.inserirPorOPbjeto(medicacao)
+    
     # insere um registro no banco de dados
     # devolve -1 se o registro a ser inserido nao tiver o código do paciente.
     # devolve o codigo do registro se operacao comsucesso
-    def inserir(self, medicacao):
+    def inserirPorOPbjeto(self, medicacao):
         # valida se o campo codigo_paciente está preenchindo
         if medicacao.codigo_paciente == None:
             return -1

@@ -14,20 +14,20 @@ class GlicemiaDAO:
     # se não existir o arquivo, cria um arquivo vazio
     def __init__(self):
         if not os.path.exists(self.arquivo):
-            with open(self.arquivo, 'w') as f:
-                json.dump([], f)
+            f = open(self.arquivo, 'w')
+            json.dump([], f)
 
     # método de uso interno:
     # carrega todos os registros do arquivo
     def _ler_todos(self):
-        with open(self.arquivo, 'r') as f:
-            return json.load(f)
+        f = open(self.arquivo, 'r')
+        return json.load(f)
 
     # método de uso interno:
     # grava todos os registos para o arquivo
     def _grava_todos(self, registros):
-        with open(self.arquivo, 'w') as f:
-            json.dump(registros, f, indent=4)
+        f = open(self.arquivo, 'w')
+        json.dump(registros, f, indent=4)
 
     # insere um registro no arquivo.
     # devolve o código se gravou com sucesso.

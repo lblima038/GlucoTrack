@@ -27,8 +27,16 @@ class UsuarioDAO:
         with open(self.arquivo, 'w') as f:
             json.dump(registros, f, indent=4)
 
+    # insere um registro no arquivo.
+    # devolve o código se gravou com sucesso.
+    # devolve -1 se registro pesquisado nao contem o codigo do paciente
+    def inserirPorDados(self, email, senha):
+
+        usuario = Usuario(None, email, senha)
+        return self.inserirPorObjeto(usuario)
+        
     # insere um usuario no banco de dados se não existir um usuário com o mesmo e-mail cadastrado
-    def inserir(self, usuario):
+    def inserirPorObjeto(self, usuario):
         usuarios = self._ler_todos()
         # verifica se existe usuario com o mesmo email
         # se houver, retorna -1 para sinalizar erro

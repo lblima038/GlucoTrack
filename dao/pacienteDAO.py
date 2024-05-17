@@ -27,10 +27,18 @@ class PacienteDAO:
         with open(self.arquivo, 'w') as f:
             json.dump(registros, f, indent=4)
 
+    # insere um registro no arquivo.
+    # devolve o código se gravou com sucesso.
+    # devolve -1 se registro pesquisado nao contem o codigo do paciente
+    def inserirPorDados(self, codigo_usuario, nome, diaNascimento, mesNascimento, anoNascimento, codigo_sexo, peso):
+
+        paciente = Paciente(None, codigo_usuario, nome, diaNascimento, mesNascimento, anoNascimento, codigo_sexo, peso)
+        return self.inserirPorObjeto(paciente)
+
     # insere um paciente no arquivo se não existir um paciente para o mesmo usuario
     # devolve o código do paciente se gravou com sucesso.
     # devolve -1 se já existir um paciente para o mesmo usuario
-    def inserir(self, paciente):
+    def inserirPorObjeto(self, paciente):
         # valida se o campo codigo_usuario está preenchindo
         if paciente.codigo_usuario == None:
             return -2
