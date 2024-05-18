@@ -33,10 +33,10 @@ class UsuarioDAO:
     def inserirPorDados(self, email, senha):
 
         usuario = Usuario(None, email, senha)
-        return self.inserirPorObjeto(usuario)
+        return self.inserir(usuario)
         
     # insere um usuario no banco de dados se não existir um usuário com o mesmo e-mail cadastrado
-    def inserirPorObjeto(self, usuario):
+    def inserir(self, usuario):
         usuarios = self._ler_todos()
         # verifica se existe usuario com o mesmo email
         # se houver, retorna -1 para sinalizar erro

@@ -35,12 +35,12 @@ class GlicemiaDAO:
     def inserirPorDados(self, codigo_paciente, dia, mes, ano, valor):
 
         glicemia = Glicemia(None, codigo_paciente, dia, mes, ano, valor)
-        return self.inserirPorObjeto(glicemia)
+        return self.inserir(glicemia)
         
     # insere um registro no arquivo.
     # devolve o código se gravou com sucesso.
     # devolve -1 se registro pesquisado nao contem o codigo do paciente
-    def inserirPorObjeto(self, glicemia):
+    def inserir(self, glicemia):
         # valida se o campo codigo_paciente está preenchindo
         if glicemia.codigo_paciente == None:
             return -1

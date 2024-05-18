@@ -29,12 +29,12 @@ class RegistroNutricionalDAO:
 
     def inserirPorDados(self, codigo_paciente, dia, mes, ano, calorias, proteinas, gorduras, carboidratos):
         registro_nutricional = RegistroNutricional(codigo_paciente, dia, mes, ano, calorias, proteinas, gorduras, carboidratos)
-        return self.inserirPorObjeto(registro_nutricional)
+        return self.inserir(registro_nutricional)
 
     # insere um registro no arquivo.
     # devolve o código se gravou com sucesso.
     # devolve -1 se registro pesquisado nao contem o codigo do paciente
-    def inserirPorObjeto(self, registro_nutricional):
+    def inserir(self, registro_nutricional):
         # valida se o campo codigo_paciente está preenchindo
         if registro_nutricional.codigo_paciente == None:
             return -2

@@ -33,12 +33,12 @@ class PacienteDAO:
     def inserirPorDados(self, codigo_usuario, nome, diaNascimento, mesNascimento, anoNascimento, codigo_sexo, peso):
 
         paciente = Paciente(None, codigo_usuario, nome, diaNascimento, mesNascimento, anoNascimento, codigo_sexo, peso)
-        return self.inserirPorObjeto(paciente)
+        return self.inserir(paciente)
 
     # insere um paciente no arquivo se não existir um paciente para o mesmo usuario
     # devolve o código do paciente se gravou com sucesso.
     # devolve -1 se já existir um paciente para o mesmo usuario
-    def inserirPorObjeto(self, paciente):
+    def inserir(self, paciente):
         # valida se o campo codigo_usuario está preenchindo
         if paciente.codigo_usuario == None:
             return -2

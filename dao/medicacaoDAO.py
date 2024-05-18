@@ -29,12 +29,12 @@ class MedicacaoDAO:
 
     def inserirPorDados(self, codigo_paciente, nome, hora_inical, periodo, lembrar):
         medicacao = Medicacao(None, codigo_paciente, nome, hora_inical, periodo, lembrar)
-        return self.inserirPorOPbjeto(medicacao)
+        return self.inserir(medicacao)
     
     # insere um registro no banco de dados
     # devolve -1 se o registro a ser inserido nao tiver o código do paciente.
     # devolve o codigo do registro se operacao comsucesso
-    def inserirPorOPbjeto(self, medicacao):
+    def inserir(self, medicacao):
         # valida se o campo codigo_paciente está preenchindo
         if medicacao.codigo_paciente == None:
             return -1
