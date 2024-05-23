@@ -11,6 +11,7 @@ from entidades.glicemia import Glicemia
 from dao.glicemiaDAO import GlicemiaDAO
 from entidades.registro_nutricional import RegistroNutricional
 from dao.registroNutricionalDAO import RegistroNutricionalDAO
+from entidades.comorbidade import Comorbidade
 
 from datetime import datetime
 import os

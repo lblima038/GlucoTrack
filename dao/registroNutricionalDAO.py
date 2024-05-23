@@ -51,7 +51,8 @@ class RegistroNutricionalDAO:
                                     'dia': registro_nutricional.dia, 
                                     'mes': registro_nutricional.mes, 
                                     'ano': registro_nutricional.ano, 
-                                    'calorias': registro_nutricional.calorias,
+#                                    'calorias': registro_nutricional.calorias,
+                                    'calorias': 4 * (registro_nutricional.proteinas + registro_nutricional.carboidratos) + 9 * (registro_nutricional.gorduras),
                                     'proteinas': registro_nutricional.proteinas,
                                     'gorduras': registro_nutricional.gorduras,
                                     'carboidratos': registro_nutricional.carboidratos}

@@ -11,11 +11,8 @@ def cadastrar_glicemia(codigo_paciente):
     print("Data registrada: ", conv.day, "/", conv.month, "/", conv.year)
 
     valor = int(input("Indique o valor de glicose registrada: "))
+    print("Valor: ", valor)
 
-    # implemetar o código que extrai da variavel 'data' o valor do dia, do mes e do ano
-    #
-    #
-    
     glicemiaDAO = GlicemiaDAO()
     glicemiaDAO.inserirPorDados(codigo_paciente, dia, mes, ano, valor)
 
