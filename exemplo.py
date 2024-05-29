@@ -12,7 +12,7 @@ from dao.glicemiaDAO import GlicemiaDAO
 from entidades.registro_nutricional import RegistroNutricional
 from dao.registroNutricionalDAO import RegistroNutricionalDAO
 from entidades.comorbidade import Comorbidade
-
+from app.cadastrar_usuario import cadastrar_usuario
 from datetime import datetime
 import os
 
@@ -197,30 +197,30 @@ def logar_usuario():
 
     return codigo
 
-def cadastrar_usuario():
-    
-    limpa_tela()
-    nome_sistema()
+#def cadastrar_usuario():
+#    
+#    limpa_tela()
+#    nome_sistema()
+#
+#    usuarioDAO = UsuarioDAO()
 
-    usuarioDAO = UsuarioDAO()
+#    print("Cadastro de Usuario")
+#    print("")
+#    email = str(input("Informe seu email: "))
+#    senha = str(input("Informe sua senha: "))
 
-    print("Cadastro de Usuario")
-    print("")
-    email = str(input("Informe seu email: "))
-    senha = str(input("Informe sua senha: "))
+#    usuario = Usuario(None, email, senha)
 
-    usuario = Usuario(None, email, senha)
-
-    codigo_usuario = usuarioDAO.inserir(usuario)
-    if codigo_usuario == -1:
-        print("")
-        print("Já existe um usuário com este email")
-        input("pressione qualquer tecla")
-        return
-    elif codigo_usuario > 0:
-        print("")
-        print("Usuário cadastrado com sucesso!")
-        input("Pressione qualquer tecla para voltar")
+#    codigo_usuario = usuarioDAO.inserir(usuario)
+#    if codigo_usuario == -1:
+#        print("")
+#        print("Já existe um usuário com este email")
+#        input("pressione qualquer tecla")
+#        return
+#    elif codigo_usuario > 0:
+#        print("")
+#        print("Usuário cadastrado com sucesso!")
+#        input("Pressione qualquer tecla para voltar")
 
 def tela_usuario_logado(codigo_usuario):
     limpa_tela()
