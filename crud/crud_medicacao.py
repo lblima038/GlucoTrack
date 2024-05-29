@@ -23,13 +23,9 @@ def _ler_todos():
 # grava todos os registos para o arquivo
 def _salvar_todos(registros):
     _criar_bd()
-    f = open(arquivo, 'w')
-    json.dump(registros, f, indent=4)
+    with open(arquivo, 'w') as f:
+        json.dump(registros, f, indent=4)
 
-def inserir_medicacao(codigo_paciente, nome, hora_inical, periodo, lembrar):
-    medicacao = Medicacao(None, codigo_paciente, nome, hora_inical, periodo, lembrar)
-    return _inserir(medicacao)
-    
 # insere um registro no banco de dados
 # devolve -1 se o registro a ser inserido nao tiver o código do paciente.
 # devolve o codigo do registro se operacao comsucesso
@@ -45,32 +41,17 @@ def _inserir(medicacao):
         if r['codigo'] > proximo_codigo:
             proximo_codigo = r['codigo']
             
-    medicacao_dic = {'codigo': proximo_codigo + 1, 'codigo_paciente': medicacao.codigo_paciente, 'nome': medicacao.nome, 'hora_inicial': medicacao.hora_inicial, 'periodo': medicacao.periodo, 'lembrar': medicacao.lembrar}
+    medicacao_dic = {'codigo': proximo_codigo + 1, 
+                     'codigo_paciente': medicacao.codigo_paciente, 
+                     'nome': medicacao.nome,
+                     'dosagem': medicacao.dosagem, 
+                     'hora_inicial': medicacao.hora_inicial, 
+                     'periodicidade': medicacao.periodicidade, 
+                     'lembrar': medicacao.lembrar}
+    
     medicacoes.append(medicacao_dic)
     _salvar_todos(medicacoes)
     return medicacao_dic['codigo']
-
-# faz uma busca do registro no arquivo pelo codigo especificado
-def buscar_medicacao(codigo):
-        medicacoes = _ler_todos()
-        for medicacao in medicacoes:
-            if medicacao['codigo'] == codigo:
-                return Medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
-        return None
-
-# faz uma busca no arquivo pelo registro com o codigo dopaciente especificado
-def buscar_medicacoes_por_codigo_paciente(codigo_paciente):
-    medicacoes = _ler_todos()
-    medicacoes_do_paciente = []
-    for medicacao in medicacoes:
-        if medicacao['codigo_paciente'] == codigo_paciente:
-            medicacao_do_paciente = Medicacao(medicacao['codigo'], medicacao['codigo_paciente'], medicacao['nome'], medicacao['hora_inicial'], medicacao['periodo'], medicacao['lembrar'])
-            medicacoes_do_paciente.append(medicacao_do_paciente)
-                
-    return medicacoes_do_paciente
-
-def atualizar_medicacao(codigo, codigo_paciente, nome, hora_inicial):
-    pass
 
 # atualiza um objeto no banco
 # se não encontrar devolve -1
@@ -79,18 +60,64 @@ def _atualizar(medicacao):
     medicacoes = _ler_todos()
     for r in medicacoes:
         if r['codigo'] == medicacao.codigo:
+            r['codigo_paciente'] = medicacao.codigo_paciente
             r['nome'] = medicacao.nome
+            r['dosagem'] = medicacao.dosagem
             r['hora_inicial'] = medicacao.hora_inicial
-            r['periodo'] = medicacao.periodo
+            r['periodicidade'] = medicacao.periodicidade
             r['lembrar'] = medicacao.lembrar
             encontrou = 1
             break
     _salvar_todos(medicacoes)
     return encontrou
 
+def inserir_medicacao(codigo_paciente, nome, dosagem, hora_inical, periodicidade, lembrar):
+    medicacao = Medicacao(None, codigo_paciente, nome, dosagem, hora_inical, periodicidade, lembrar)
+    return _inserir(medicacao)
+    
+# faz uma busca do registro no arquivo pelo codigo especificado
+def buscar_medicacao(codigo):
+        medicacoes = _ler_todos()
+        for medicacao in medicacoes:
+            if medicacao['codigo'] == codigo:
+                return Medicacao(medicacao['codigo'], 
+                                 medicacao['codigo_paciente'], 
+                                 medicacao['nome'], 
+                                 medicacao['dosagem'],
+                                 medicacao['hora_inicial'], 
+                                 medicacao['periodicidade'], 
+                                 medicacao['lembrar'])
+        return None
+
+# faz uma busca no arquivo pelo registro com o codigo dopaciente especificado
+def buscar_medicacoes_por_paciente(codigo_paciente):
+    medicacoes = _ler_todos()
+    medicacoes_do_paciente = []
+    for medicacao in medicacoes:
+        if medicacao['codigo_paciente'] == codigo_paciente:
+            medicacao_do_paciente = Medicacao(medicacao['codigo'], 
+                                              medicacao['codigo_paciente'], 
+                                              medicacao['nome'],
+                                              medicacao['dosagem'], 
+                                              medicacao['hora_inicial'], 
+                                              medicacao['periodicidade'], 
+                                              medicacao['lembrar'])
+            medicacoes_do_paciente.append(medicacao_do_paciente)
+                
+    return medicacoes_do_paciente
+
+def atualizar_medicacao(codigo, codigo_paciente, nome, dosagem, hora_inicial, periodicidade, lembrar):
+    medicacao = Medicacao(codigo, codigo_paciente, nome, dosagem, hora_inicial, periodicidade, lembrar)
+
+    return _atualizar(medicacao)
+
 # remove um registro do banco a partir do codigo especificado
 def apagar_medicacao(codigo):
     medicacoes = _ler_todos()
-    medicacoes = [medicacao for medicacao in medicacoes if medicacao['codigo'] != codigo]
-    _salvar_todos(medicacoes)
+    nova_lista_medicacoes = []
+    for medicacao in medicacoes:
+        if medicacao['codigo'] != codigo:
+            nova_lista_medicacoes.append(medicacao)
+    
+    _salvar_todos(nova_lista_medicacoes)
 

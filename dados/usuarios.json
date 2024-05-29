@@ -13,5 +13,10 @@
         "codigo": 3,
         "email": "meu@email.com",
         "senha": "1"
+    },
+    {
+        "codigo": 4,
+        "email": "meuemail@teste.com",
+        "senha": "234234"
     }
 ]

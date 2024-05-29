@@ -131,6 +131,5 @@ def login(email, senha):
             if r['senha'] == senha:
                 return r['codigo']
             
-    print("email/senha inválidos")
-    return False
+    return -1
     

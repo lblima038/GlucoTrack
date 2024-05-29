@@ -13,8 +13,7 @@ class SexoDAO:
     def __init__(self):
         if not os.path.exists(self.arquivo):
             tipos = [ { "codigo": "F", "descricao": "Feminino" },
-                      { "codigo": "M", "descricao": "Masculino" },
-                      { "codigo": "N", "descricao": "Não especificado" }]
+                      { "codigo": "M", "descricao": "Masculino" }]
 
             with open(self.arquivo, 'w') as f:
                 json.dump([], f)

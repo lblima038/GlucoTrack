@@ -1,4 +1,5 @@
 from datetime import date
+import os
 
 def converte_json_para_date(data_json):
     dia = data_json[:2]
@@ -18,4 +19,21 @@ def converte_date_para_json(data_date):
 
     return data_json
 
+def limpa_tela():
+    os.system("cls")
+
+def tela_inicial():
+    limpa_tela()
+    nome_sistema()
+    menu_inicial()
     
+def menu_inicial():
+    print("1 - Entrar no sistema")
+    print("2 - Cadastrar-se no sistema")
+    print("0 - Finalizar")
+    print("")
+
+def nome_sistema():
+    print("==============================================================================")
+    print("======================== GlucoTrack - Versão 1.0 =============================")
+    print("")

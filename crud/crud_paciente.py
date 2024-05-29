@@ -7,13 +7,12 @@ import os
 # caminho para o arquivo de dados no computador
 arquivo = 'dados/pacientes.json'
 
-    # se não existir o arquivo, cria um arquivo vazio
+# se não existir o arquivo, cria um arquivo vazio
 def _criar_bd():
     if not os.path.exists(arquivo):
         with open(arquivo, 'w') as f:
             json.dump([], f)
 
-# método de uso interno:
 # carrega todos os registros do arquivo para a memória
 def _ler_todos():
     _criar_bd()
@@ -21,7 +20,6 @@ def _ler_todos():
     with open(arquivo, 'r') as f:
         return json.load(f)
 
-# método de uso interno:
 # grava todos os registos para o arquivo
 def _salvar_todos(registros):
     _criar_bd()
@@ -46,23 +44,21 @@ def _inserir(paciente):
             print("Já existe um paciente com este usuário cadastrado")
             return -1
 
-    # converte a data de nascimento de datetime para string para poder salvar no arquivo
-    data_nascimento = converte_date_para_json(paciente.data_nascimento)
-
     # procura o maior código de paciente cadastrado no banco para adicionar mais 1       
     proximo_codigo = 0
     for r in pacientes:
         if r['codigo'] > proximo_codigo:
             proximo_codigo = r['codigo']
             
-    paciente_dic = { 'codigo':          proximo_codigo + 1, 
-                     'codigo_usuario':  paciente.codigo_usuario, 
-                     'nome':            paciente.nome, 
-                     'data_nascimento': data_nascimento, 
-                     'codigo_sexo':     paciente.codigo_sexo, 
-                     'peso':            paciente.peso, 
-                     'altura':          paciente.altura,
-                     'codigo_diabete':  paciente.codigo_diabete }
+    paciente_dic = { 'codigo':         proximo_codigo + 1, 
+                     'codigo_usuario': paciente.codigo_usuario, 
+                     'nome':           paciente.nome, 
+                     'idade':          paciente.idade, 
+                     'codigo_sexo':    paciente.codigo_sexo, 
+                     'peso':           paciente.peso, 
+                     'altura':         paciente.altura,
+                     'codigo_diabete': paciente.codigo_diabete,
+                     'comorbidades':   paciente.comorbidades }
     
     pacientes.append(paciente_dic)
     _salvar_todos(pacientes)
@@ -71,9 +67,9 @@ def _inserir(paciente):
 # insere um registro no arquivo.
 # devolve o código se gravou com sucesso.
 # devolve -1 se registro não for encontrado
-def inserir_paciente(codigo_usuario, nome, data_nascimento, codigo_sexo, peso, altura, codigo_diabete):
+def inserir_paciente(codigo_usuario, nome, idade, codigo_sexo, peso, altura, codigo_diabete, comorbidades):
 
-    paciente = Paciente(None, codigo_usuario, nome, data_nascimento, codigo_sexo, peso, altura, codigo_diabete)
+    paciente = Paciente(None, codigo_usuario, nome, idade, codigo_sexo, peso, altura, codigo_diabete, comorbidades)
 
     return _inserir(paciente)
 
@@ -84,17 +80,15 @@ def buscar_paciente(codigo):
     pacientes = _ler_todos()
     for r in pacientes:
         if r['codigo'] == codigo:
-            # se encontrou converte a data de nascimento no formato string para o formato datetime
-            data_nascimento = converte_json_para_date(r['data_nascimento'])
-            
             return Paciente(r['codigo'], 
                             r['codigo_usuario'], 
-                            r['nome'], 
-                            data_nascimento, 
+                            r['nome'],
+                            r['idade'], 
                             r['codigo_sexo'], 
                             r['peso'], 
                             r['altura'],
-                            r['codigo_diabete'])
+                            r['codigo_diabete'],
+                            r['comorbidades'])
 
     print("Paciente não encontrado")
     return -1
@@ -104,26 +98,24 @@ def buscar_paciente_por_codigo_usuario(codigo_usuario):
     pacientes = _ler_todos()
     for r in pacientes:
         if r['codigo_usuario'] == codigo_usuario:
-            # se encontrou converte a data de nascimento no formato string para o formato datetime
-            data_nascimento = converte_json_para_date(r['data_nascimento'])
-
             return Paciente(r['codigo'], 
                             r['codigo_usuario'], 
                             r['nome'], 
-                            data_nascimento, 
+                            r['idade'], 
                             r['codigo_sexo'], 
                             r['peso'], 
                             r['altura'],
-                            r['codigo_diabete'])
+                            r['codigo_diabete'],
+                            r['comorbidades'])
         
     print("Paciente não encontrado")
     return -1
 
 # atualiza um objeto paciente no banco
 # se não encontrar devolve -1
-def atualizar_paciente(codigo, codigo_usuario, nome, data_nascimento, codigo_sexo, peso, altura, codigo_diabete):
+def atualizar_paciente(codigo, codigo_usuario, nome, idade, codigo_sexo, peso, altura, codigo_diabete, comorbidades):
 
-    paciente = Paciente(codigo, codigo_usuario, nome, data_nascimento, codigo_sexo, peso, altura, codigo_diabete)
+    paciente = Paciente(codigo, codigo_usuario, nome, idade, codigo_sexo, peso, altura, codigo_diabete, comorbidades)
 
     return _atualizar(paciente)
 
@@ -139,11 +131,12 @@ def _atualizar(paciente):
     for r in pacientes:
         if r['codigo'] == paciente.codigo:
             r['nome'] = paciente.nome
-            r['data_nascimento'] = converte_json_para_date(paciente.data_nascimento)
+            r['idade'] = paciente.idade
             r['codigo_sexo'] = paciente.codigo_sexo
             r['peso'] = paciente.peso
             r['altura'] = paciente.altura
             r['codigo_diabete'] = paciente.codigo_diabete
+            r['comorbidades'] = paciente.comorbidades
             encontrou = True
             break
         _salvar_todos(pacientes)
@@ -170,16 +163,15 @@ def buscar_pacientes():
     lista_de_pacientes = []
 
     for r in pacientes:
-        data_nascimento = converte_json_para_date(r['data_nascimento'])
-
         paciente = Paciente(r['codigo'], 
                             r['codigo_usuario'], 
                             r['nome'], 
-                            data_nascimento, 
+                            r['idade'], 
                             r['codigo_sexo'], 
                             r['peso'], 
                             r['altura'], 
-                            r['codigo_diabete'])
+                            r['codigo_diabete'],
+                            r['comorbidades'])
         lista_de_pacientes.append(paciente)
         
     return lista_de_pacientes

@@ -6,9 +6,5 @@
     {
         "codigo": "M",
         "descricao": "Masculino"
-    },
-    {
-        "codigo": "N",
-        "descricao": "N\u00e3o especificado"
     }
 ]
