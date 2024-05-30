@@ -2,6 +2,7 @@ import os
 from app.cadastrar_usuario import cadastrar_usuario
 from util.util import nome_sistema
 from util.util import limpa_tela
+from
 
 def inicio():
     limpa_tela()
@@ -22,8 +23,6 @@ def inicio():
             inicio()
         case 0:
             exit()
-    
-    
     
 if __name__ == "__main__":
     inicio()
