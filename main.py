@@ -1,21 +1,23 @@
 import os
+from app.cadastrar_usuario import cadastrar_usuario
+from util.util import nome_sistema
+from util.util import limpa_tela
 
 def funcao ():
-    os.system('cls') 
-    print("========= GlucoTrack (versão: 1.0) =========")
-    print()
+    limpa_tela()
+    nome_sistema()
     print("1. Entrar")
     print("2. Cadastrar usuário")
     print("0. Sair")
     print("============================================")
     print()
-    opcao=input("Digite sua opção: ")
+    opcao=int(input("Digite sua opção: "))
     
     match(opcao):
         case 1:
             pass
         case 2:
-            pass
+            cadastrar_usuario()
         case 0:
             exit()
     
