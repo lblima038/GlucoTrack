@@ -1,7 +1,7 @@
 from app.area_usuario_logado import tela_principal
-from app.cadastro_de_usuario import cadastrar_usuario
+from app.cadastro_usuario import cadastrar_usuario
 from util.util import nome_sistema, limpa_tela
-from app.cadastro_de_usuario import logar
+from app.cadastro_usuario import logar
 
 def inicio():
     limpa_tela()

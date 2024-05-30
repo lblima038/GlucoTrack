@@ -3,8 +3,8 @@ from util.util import limpa_tela, nome_sistema
 import json
 from datetime import datetime
 
-# tela de adição de registro nutricional 
-def adicionar_alimentos(codigo_paciente):
+# tela de adição de alimentos (registro nutricional) 
+def adicionar_alimento(codigo_paciente):
     limpa_tela()
     nome_sistema()
     print("Registro de Alimentos")
@@ -25,3 +25,8 @@ def adicionar_alimentos(codigo_paciente):
     else:
         input("Registro cadastrado com sucesso!")
 
+def editar_alimento(codigo_paciente):
+    pass
+
+def excluir_alimento(codigo_paciente):
+    pass
