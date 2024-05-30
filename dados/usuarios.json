@@ -33,5 +33,10 @@
         "codigo": 7,
         "email": "meuemail2@teste.com",
         "senha": "1"
+    },
+    {
+        "codigo": 8,
+        "email": "Teste@teste.com",
+        "senha": "teste"
     }
 ]
