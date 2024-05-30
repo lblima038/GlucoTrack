@@ -2,7 +2,7 @@ import os
 from app.cadastrar_usuario import cadastrar_usuario
 from util.util import nome_sistema
 from util.util import limpa_tela
-from
+from app.logar_usuario import logar
 
 def inicio():
     limpa_tela()
@@ -17,7 +17,11 @@ def inicio():
     
     match(opcao):
         case 1:
-            pass
+            sucesso = logar()
+            if sucesso == -1:
+                inicio()
+            else:
+                pass #desenvolver função de usuário logado
         case 2:
             cadastrar_usuario()
             inicio()
