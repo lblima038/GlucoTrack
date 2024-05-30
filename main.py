@@ -11,6 +11,7 @@ def inicio():
     print("0. Sair")
     print("============================================")
     print()
+    
     opcao=int(input("Digite sua opção: "))
     
     match(opcao):
@@ -18,6 +19,7 @@ def inicio():
             pass
         case 2:
             cadastrar_usuario()
+            inicio()
         case 0:
             exit()
     

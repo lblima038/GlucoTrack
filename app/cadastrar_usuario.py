@@ -12,8 +12,15 @@ def cadastrar_usuario():
     print("Cadastro de Usuario")
     print("")
     email = str(input("Informe seu email: "))
+    while(email == ""):
+        print("Email inválido!")
+        email = str(input("Informe seu email: "))
+    
     senha = str(input("Informe sua senha: "))
-
+    while(senha == ""):
+        print("Senha inválida!")
+        senha = str(input("Informe sua senha: "))
+        
     usuario = Usuario(None, email, senha)
 
     codigo_usuario = usuarioDAO.inserir(usuario)
