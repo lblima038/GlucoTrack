@@ -3,7 +3,7 @@ from app.cadastrar_usuario import cadastrar_usuario
 from util.util import nome_sistema
 from util.util import limpa_tela
 
-def funcao ():
+def inicio():
     limpa_tela()
     nome_sistema()
     print("1. Entrar")
@@ -11,6 +11,7 @@ def funcao ():
     print("0. Sair")
     print("============================================")
     print()
+    
     opcao=int(input("Digite sua opção: "))
     
     match(opcao):
@@ -18,11 +19,12 @@ def funcao ():
             pass
         case 2:
             cadastrar_usuario()
+            inicio()
         case 0:
             exit()
     
     
     
 if __name__ == "__main__":
-    funcao()
+    inicio()
     
