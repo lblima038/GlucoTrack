@@ -1,3 +1,4 @@
+import re
 from datetime import date
 import os
 
@@ -27,3 +28,7 @@ def nome_sistema():
     print("☼========= GlucoTrack (versão: 1.0) =========☼")
     print("☼============================================☼")
     print()
+
+def validar_email(email):
+    padrao = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(padrao, email) is not None

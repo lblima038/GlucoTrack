@@ -19,7 +19,7 @@ def adicionar_alimentos(codigo_paciente):
     calorias = (carboidratos * 4) + (proteinas * 4) + (gorduras * 9)
     print(f"Calorias                : {calorias}")
 
-    resultado = inserir_registro_nutricional(codigo_paciente, data_hora, calorias, proteinas, gorduras, carboidratos)
+    resultado = inserir_registro_nutricional(codigo_paciente, alimento, data_hora, calorias, proteinas, gorduras, carboidratos)
     if resultado <= 0:
         input("ERRO na inclusão do registro nutricional !")
     else:

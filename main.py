@@ -1,6 +1,7 @@
-from app.cadastrar_usuario import cadastrar_usuario
+from app.area_usuario_logado import tela_principal
+from app.cadastro_de_usuario import cadastrar_usuario
 from util.util import nome_sistema, limpa_tela
-from app.logar_usuario import logar
+from app.cadastro_de_usuario import logar
 
 def inicio():
     limpa_tela()
@@ -11,20 +12,20 @@ def inicio():
     print("============================================")
     print()
     
-    opcao=int(input("Digite sua opção: "))
+    opcao = input("Digite sua opção: ")
     
-    match(opcao):
-        case 1:
+    match opcao:
+        case '1':
             sucesso = logar()
-            if sucesso == -1:
-                inicio()
-            else:
-                pass #desenvolver função de usuário logado
-        case 2:
+            if sucesso > 0:
+                tela_principal(sucesso)
+        case '2':
             cadastrar_usuario()
-            inicio()
-        case 0:
+        case '0':
+            print("Obrigado por usar o GlucoTrack.")
             exit()
+        
+    inicio()
     
 if __name__ == "__main__":
     inicio()

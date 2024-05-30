@@ -43,7 +43,7 @@ def _inserir(registro_nutricional):
     registro_nutricional_dic = {'codigo': proximo_codigo + 1, 
                                 'codigo_paciente': registro_nutricional.codigo_paciente, 
                                 'nome': registro_nutricional.nome, 
-                                'data': registro_nutricional.data.strfp("%d/%m/%y"), 
+                                'data': datetime(registro_nutricional.data).strftime("%d/%m/%Y %H:%M"), 
                                 'calorias': registro_nutricional.calorias,
                                 'proteinas': registro_nutricional.proteinas,
                                 'gorduras': registro_nutricional.gorduras,
@@ -60,7 +60,7 @@ def _atualizar(registro_nutricional):
     for r in registros_nutricionais:
         if r['codigo'] == registro_nutricional.codigo:
             r['nome'] = registro_nutricional.nome
-            r['data'] = registro_nutricional.data
+            r['data'] = datetime(registro_nutricional.data).strftime("%d/%m/%Y %H:%M")
             r['calorias'] = registro_nutricional.calorias
             r['proteinas'] = registro_nutricional.proteinas
             r['gorduras'] = registro_nutricional.gorduras
@@ -85,7 +85,7 @@ def buscar_registro_nutricional_por_codigo(codigo):
     registros_nutricionais = _ler_todos()
     for r in registros_nutricionais:
         if r['codigo'] == codigo:
-            return RegistroNutricional(r['codigo'], r['codigo_paciente'], r['nome'], r['data'], r['calorias'], r['proteinas'], r['gorduras'], r['carboidratos'])
+            return RegistroNutricional(r['codigo'], r['codigo_paciente'], r['nome'], datetime.strptime(r['data'], "%d/%m/%Y %H:%M"), r['calorias'], r['proteinas'], r['gorduras'], r['carboidratos'])
     return None
 
 # faz uma busca no arquivo pelo registro com o codigo dopaciente especificado
@@ -94,7 +94,7 @@ def buscar_registro_nutricional_por_codigo_paciente(codigo_paciente):
     registros_do_paciente = []
     for r in registros:
         if r['codigo_paciente'] == codigo_paciente:
-            registro_do_paciente = RegistroNutricional(r['codigo'], r['codigo_paciente'], r['nome'], r['data'], r['calorias'], r['proteinas'], r['gorduras'], r['carboidratos'])
+            registro_do_paciente = RegistroNutricional(r['codigo'], r['codigo_paciente'], r['nome'], datetime.strptime(r['data'], "%d/%m/%Y %H:%M"), r['calorias'], r['proteinas'], r['gorduras'], r['carboidratos'])
             registros_do_paciente.append(registro_do_paciente)
                 
     return registros_do_paciente

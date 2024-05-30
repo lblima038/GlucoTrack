@@ -28,5 +28,10 @@
         "codigo": 6,
         "email": "lucas",
         "senha": "lucas"
+    },
+    {
+        "codigo": 7,
+        "email": "meuemail2@teste.com",
+        "senha": "1"
     }
 ]
