@@ -3,7 +3,7 @@ from app.cadastrar_usuario import cadastrar_usuario
 from util.util import nome_sistema
 from util.util import limpa_tela
 
-def funcao ():
+def inicio():
     limpa_tela()
     nome_sistema()
     print("1. Entrar")
@@ -24,5 +24,5 @@ def funcao ():
     
     
 if __name__ == "__main__":
-    funcao()
+    inicio()
     

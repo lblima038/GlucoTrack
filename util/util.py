@@ -34,5 +34,5 @@ def menu_inicial():
     print("")
 
 def nome_sistema():
-    print("========= GlucoTrack (versão: 1.0) =========")
+    print("☼========= GlucoTrack (versão: 1.0) =========☼")
     print()
