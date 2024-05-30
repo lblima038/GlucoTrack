@@ -1,7 +1,5 @@
-import os
 from app.cadastrar_usuario import cadastrar_usuario
-from util.util import nome_sistema
-from util.util import limpa_tela
+from util.util import nome_sistema, limpa_tela
 from app.logar_usuario import logar
 
 def inicio():

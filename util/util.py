@@ -21,18 +21,9 @@ def converte_date_para_json(data_date):
 
 def limpa_tela():
     os.system("cls")
-
-def tela_inicial():
-    limpa_tela()
-    nome_sistema()
-    menu_inicial()
     
-def menu_inicial():
-    print("1 - Entrar no sistema")
-    print("2 - Cadastrar-se no sistema")
-    print("0 - Finalizar")
-    print("")
-
 def nome_sistema():
+    print("☼============================================☼")
     print("☼========= GlucoTrack (versão: 1.0) =========☼")
+    print("☼============================================☼")
     print()

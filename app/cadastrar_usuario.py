@@ -1,6 +1,6 @@
 from dao.usuarioDAO import UsuarioDAO
 from entidades.usuario import Usuario
-from util.util import limpa_tela, nome_sistema, menu_inicial
+from util.util import limpa_tela, nome_sistema
 
 def cadastrar_usuario():
     
