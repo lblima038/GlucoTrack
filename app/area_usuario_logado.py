@@ -15,24 +15,29 @@ def tela_principal(codigo_usuario):
     match opcao:
         case '1':
             listar_dados_paciente(codigo_usuario)
+            tela_principal(codigo_usuario)
             
         case '2':
             print("opcao 2")
             input("pressione qualquer tecla")
+            tela_principal(codigo_usuario)
             
         case '3':
             print("opcao 3")
             input("pressione qualquer tecla")
+            tela_principal(codigo_usuario)
             
         case '4':
             print("opcao 4")
             input("pressione qualquer tecla")
+            tela_principal(codigo_usuario)
             
         case '0':
             pass
-        
-    tela_principal(codigo_usuario)
 
+        case _:
+            tela_principal(codigo_usuario)
+        
 def menu_principal():
     print("1. Dados Cadastrais")
     print("2. Medicacoes")
