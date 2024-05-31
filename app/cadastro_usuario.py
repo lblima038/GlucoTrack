@@ -1,6 +1,7 @@
 from dao.usuarioDAO import UsuarioDAO
 from entidades.usuario import Usuario
 from crud.crud_usuario import login
+from app.cadastro_paciente import cadastrar_paciente
 from util.util import limpa_tela, nome_sistema
 from util.util import validar_email
 
@@ -37,6 +38,9 @@ def cadastrar_usuario():
         print()
         print("Usuário cadastrado com sucesso!")
         input("Pressione qualquer tecla para voltar")
+        
+        # cadastra paciente
+        cadastrar_paciente(codigo_usuario)
 
 # tenta logar o usuario com email e senha
 def logar():

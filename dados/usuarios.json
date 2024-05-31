@@ -16,22 +16,17 @@
     },
     {
         "codigo": 4,
-        "email": "meuemail@teste.com",
-        "senha": "234234"
+        "email": "teste30@teste.com",
+        "senha": "1"
     },
     {
         "codigo": 5,
-        "email": "dada",
-        "senha": "dada"
+        "email": "teste31@teste.com",
+        "senha": "1"
     },
     {
         "codigo": 6,
-        "email": "lucas",
-        "senha": "lucas"
-    },
-    {
-        "codigo": 7,
-        "email": "meuemail2@teste.com",
+        "email": "teste32@teste.com",
         "senha": "1"
     }
 ]

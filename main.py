@@ -6,6 +6,7 @@ from app.cadastro_usuario import logar
 def inicio():
     limpa_tela()
     nome_sistema()
+
     print("1. Entrar")
     print("2. Cadastrar usuário")
     print("0. Sair")
@@ -19,8 +20,10 @@ def inicio():
             sucesso = logar()
             if sucesso > 0:
                 tela_principal(sucesso)
+
         case '2':
             cadastrar_usuario()
+
         case '0':
             print("Obrigado por usar o GlucoTrack.")
             exit()

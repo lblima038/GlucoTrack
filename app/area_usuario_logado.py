@@ -1,4 +1,5 @@
 from util.util import limpa_tela, nome_sistema
+from app.cadastro_paciente import listar_dados_paciente
 from crud.crud_paciente import buscar_paciente_por_codigo_usuario
 
 def tela_principal(codigo_usuario):
@@ -13,21 +14,24 @@ def tela_principal(codigo_usuario):
 
     match opcao:
         case '1':
-            print("opcao 1")
-            input("pressione qualquer tecla")
-            pass
+            listar_dados_paciente(codigo_usuario)
+            
         case '2':
-            print("opcao 1")
+            print("opcao 2")
             input("pressione qualquer tecla")
-            pass
+            
         case '3':
-            print("opcao 1")
+            print("opcao 3")
             input("pressione qualquer tecla")
-            pass
+            
+        case '4':
+            print("opcao 4")
+            input("pressione qualquer tecla")
+            
         case '0':
             pass
-        case _:
-            tela_principal(codigo_usuario)
+        
+    tela_principal(codigo_usuario)
 
 def menu_principal():
     print("1. Dados Cadastrais")

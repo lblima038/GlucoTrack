@@ -31,5 +31,27 @@
         "altura": 333.0,
         "codigo_diabete": "3",
         "comorbidades": ""
+    },
+    {
+        "codigo": 4,
+        "codigo_usuario": 4,
+        "nome": "DFFD DFDFD DFDFDF ",
+        "idade": 34,
+        "codigo_sexo": "M",
+        "peso": 77,
+        "altura": 166,
+        "codigo_diabete": "X",
+        "comorbidades": "5"
+    },
+    {
+        "codigo": 5,
+        "codigo_usuario": 6,
+        "nome": "DFDF DFD DFD FDF DFD FDF FD",
+        "idade": 34,
+        "codigo_sexo": "M",
+        "peso": 77,
+        "altura": 166,
+        "codigo_diabete": "5",
+        "comorbidades": "pressao alta, epilepsia, covid"
     }
 ]
