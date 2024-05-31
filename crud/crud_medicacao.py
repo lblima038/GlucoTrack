@@ -80,13 +80,7 @@ def buscar_medicacao(codigo):
         medicacoes = _ler_todos()
         for medicacao in medicacoes:
             if medicacao['codigo'] == codigo:
-                return Medicacao(medicacao['codigo'], 
-                                 medicacao['codigo_paciente'], 
-                                 medicacao['nome'], 
-                                 medicacao['dosagem'],
-                                 medicacao['hora_inicial'], 
-                                 medicacao['periodicidade'], 
-                                 medicacao['lembrar'])
+                return medicacao
         return None
 
 # faz uma busca no arquivo pelo registro com o codigo dopaciente especificado
@@ -95,14 +89,7 @@ def buscar_medicacoes_por_paciente(codigo_paciente):
     medicacoes_do_paciente = []
     for medicacao in medicacoes:
         if medicacao['codigo_paciente'] == codigo_paciente:
-            medicacao_do_paciente = Medicacao(medicacao['codigo'], 
-                                              medicacao['codigo_paciente'], 
-                                              medicacao['nome'],
-                                              medicacao['dosagem'], 
-                                              medicacao['hora_inicial'], 
-                                              medicacao['periodicidade'], 
-                                              medicacao['lembrar'])
-            medicacoes_do_paciente.append(medicacao_do_paciente)
+            medicacoes_do_paciente.append(medicacao)
                 
     return medicacoes_do_paciente
 

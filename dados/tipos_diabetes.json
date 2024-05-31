@@ -14,5 +14,9 @@
     {
         "codigo": 4,
         "descricao": "Outros"
+    },
+    {
+        "codigo": 5,
+        "descricao": "N\u00e3o possui"
     }
 ]

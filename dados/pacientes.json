@@ -7,7 +7,7 @@
         "codigo_sexo": "M",
         "peso": 77.0,
         "altura": 166.0,
-        "codigo_diabete": "1",
+        "codigo_diabete": 1,
         "comorbidades": ""
     },
     {
@@ -18,7 +18,7 @@
         "codigo_sexo": "F",
         "peso": 57.0,
         "altura": 156.0,
-        "codigo_diabete": "2",
+        "codigo_diabete": 2,
         "comorbidades": ""
     },
     {
@@ -29,7 +29,7 @@
         "codigo_sexo": "F",
         "peso": 44.0,
         "altura": 333.0,
-        "codigo_diabete": "3",
+        "codigo_diabete": 3,
         "comorbidades": ""
     },
     {
@@ -40,18 +40,29 @@
         "codigo_sexo": "M",
         "peso": 77,
         "altura": 166,
-        "codigo_diabete": "X",
+        "codigo_diabete": 5,
         "comorbidades": "5"
     },
     {
         "codigo": 5,
         "codigo_usuario": 6,
-        "nome": "DFDF DFD DFD FDF DFD FDF FD",
+        "nome": "JOS\u00c9 ANTONIO VIEIRA DA SILVA",
         "idade": 34,
         "codigo_sexo": "M",
         "peso": 77,
         "altura": 166,
-        "codigo_diabete": "5",
+        "codigo_diabete": 3,
         "comorbidades": "pressao alta, epilepsia, covid"
+    },
+    {
+        "codigo": 6,
+        "codigo_usuario": 10,
+        "nome": "DDFDFSS DFD",
+        "idade": 33,
+        "codigo_sexo": "M",
+        "peso": 33,
+        "altura": 150,
+        "codigo_diabete": 5,
+        "comorbidades": "dfdfd fdfd"
     }
 ]

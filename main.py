@@ -4,13 +4,12 @@ from util.util import nome_sistema, limpa_tela
 from app.cadastro_usuario import logar
 
 def inicio():
-    limpa_tela()
+    limpa_tela()    
     nome_sistema()
 
     print("1. Entrar")
     print("2. Cadastrar usuário")
     print("0. Sair")
-    print("============================================")
     print()
     
     opcao = input("Digite sua opção: ")

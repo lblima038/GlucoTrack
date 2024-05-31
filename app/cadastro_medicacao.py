@@ -1,5 +1,9 @@
+from datetime import datetime
 from dao.medicacaoDAO import MedicacaoDAO
 from entidades.medicacao import Medicacao
+from crud.crud_medicacao import inserir_medicacao, buscar_medicacao, apagar_medicacao, buscar_medicacoes_por_paciente, atualizar_medicacao
+from crud.crud_paciente import buscar_paciente_por_codigo_usuario
+from util.util import listar_dados, limpa_tela, nome_sistema
 
 def nova_medicacao(codigo_paciente):
 	codigo = 0
@@ -32,3 +36,13 @@ para encerrar digite algo invalido:\n""")
 		print("Nao entendi, entao suponho que nao deseja")
 		lembrar = False	
 	return Medicacao(codigo, codigo_paciente, nome, dosagem, horarios, lembrar)
+
+def listar_medicacoes(codigo_usaurio):
+	paciente = buscar_paciente_por_codigo_usuario(codigo_usaurio)
+	medicacoes = buscar_medicacoes_por_paciente(paciente.codigo)
+
+	limpa_tela()
+	nome_sistema()
+	print("Medicações")
+	listar_dados(medicacoes)
+	input("pressione qualquer tecla...")

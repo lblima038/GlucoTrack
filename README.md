@@ -17,3 +17,11 @@ permitindo que a equipe possa se dividir no desenvolvimento da aplicação e fac
 Neste momento, a camada de dados está baseada em arquivos no formato json. A camada de interface com o usuário utiliza o console.
 No futuro, através de interfaces, implementaremos mais desacoplamento permitindo que cada camada possa utilizar tecnologias diferentes (bancos de dados relacionais,
 NOSQL, serviços em nuvem, interface com usuário mais robustas e visuais, etc).
+
+Para rodar é necessário instalar no python as bibliotecas:
+PrettyTable: para exibição de dados em tabelas no console
+PyFiglet: para exibição de títulos amigáveis no console
+
+Instruções para instalação das bibliotecas:
+pip install prettytable
+pip install pyfiglet

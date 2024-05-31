@@ -1,6 +1,4 @@
 from entidades.paciente import Paciente
-from util.util import converte_json_para_date
-from util.util import converte_date_para_json
 import json
 import os
 
@@ -139,7 +137,8 @@ def _atualizar(paciente):
             r['comorbidades'] = paciente.comorbidades
             encontrou = True
             break
-        _salvar_todos(pacientes)
+
+    _salvar_todos(pacientes)
     
     # retorno True se atualizou com sucesso ou False se não encontrou o registro
     return encontrou

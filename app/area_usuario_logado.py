@@ -1,12 +1,13 @@
 from util.util import limpa_tela, nome_sistema
 from app.cadastro_paciente import listar_dados_paciente
+from app.cadastro_medicacao import listar_medicacoes
 from crud.crud_paciente import buscar_paciente_por_codigo_usuario
 
 def tela_principal(codigo_usuario):
     limpa_tela()
     nome_sistema()
     paciente = buscar_paciente_por_codigo_usuario(codigo_usuario)
-    print(paciente.nome)
+    print("Usuário: ", paciente.nome)
     print()
     menu_principal()
     print()
@@ -18,8 +19,7 @@ def tela_principal(codigo_usuario):
             tela_principal(codigo_usuario)
             
         case '2':
-            print("opcao 2")
-            input("pressione qualquer tecla")
+            listar_medicacoes(codigo_usuario)
             tela_principal(codigo_usuario)
             
         case '3':

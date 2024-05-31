@@ -4,7 +4,8 @@
         "codigo_paciente": 2,
         "nome": "Nimesulida",
         "hora_inicial": "8:00",
-        "periodo": 5,
+        "periodicidade": 5,
+        "dosagem": "1 comprimido",
         "lembrar": "S"
     },
     {
@@ -12,7 +13,8 @@
         "codigo_paciente": 3,
         "nome": "remedio1",
         "hora_inicial": "9:00",
-        "periodo": 2,
+        "periodicidade": 2,
+        "dosagem": "1 comprimido",
         "lembrar": "S"
     },
     {
@@ -20,7 +22,8 @@
         "codigo_paciente": 3,
         "nome": "remedio2",
         "hora_inicial": "8:00",
-        "periodo": 5,
+        "periodicidade": 5,
+        "dosagem": "1 comprimido",
         "lembrar": "S"
     },
     {
@@ -28,7 +31,8 @@
         "codigo_paciente": 3,
         "nome": "remedio3",
         "hora_inicial": "2:00",
-        "periodo": 6,
+        "periodicidade": 6,
+        "dosagem": "1 comprimido",
         "lembrar": "s"
     }
 ]

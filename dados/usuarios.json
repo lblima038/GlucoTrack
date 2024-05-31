@@ -33,5 +33,15 @@
         "codigo": 8,
         "email": "Teste@teste.com",
         "senha": "teste"
+    },
+    {
+        "codigo": 9,
+        "email": "ivo@hotmail.com",
+        "senha": "2"
+    },
+    {
+        "codigo": 10,
+        "email": "teeet@teere.com",
+        "senha": "1"
     }
 ]
