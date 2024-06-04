@@ -75,3 +75,28 @@ def descricao_sexo(codigo):
     for r in tipos:
         if r['codigo'] == codigo:
             return r['descricao']
+
+def menu_padrao(titulo, opcoes):
+    acoes = opcoes[1::2]
+    opcoes = opcoes[0::2]
+    while True:
+        limpa_tela()
+        nome_sistema()
+        print("")
+        print(f"# {titulo}\n\n")
+        print("Operacoes:\n")
+        for i, op in enumerate(opcoes):
+            print(f"{i+1}. {op}\n")
+        print("0. Sair\n")
+        choice = input("Digite a desejada: ")
+        if choice.isdigit():
+            choice = int(choice)
+        else:
+            continue
+        if choice == 0 or choice >= len(opcoes):
+            return
+        print("\n")
+        if a := acoes[choice+1]:
+            a()
+
+
