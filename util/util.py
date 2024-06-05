@@ -82,11 +82,10 @@ def menu_padrao(titulo, opcoes):
     while True:
         limpa_tela()
         nome_sistema()
-        print("")
-        print(f"# {titulo}\n\n")
+        print(f"# {titulo}\n")
         print("Operacoes:\n")
         for i, op in enumerate(opcoes):
-            print(f"{i+1}. {op}\n")
+            print(f"{i+1}. {op}")
         print("0. Sair\n")
         choice = input("Digite a desejada: ")
         if choice.isdigit():
@@ -99,4 +98,4 @@ def menu_padrao(titulo, opcoes):
         if a := acoes[choice-1]:
             a()
 
-
+def editar_p
