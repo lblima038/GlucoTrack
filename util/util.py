@@ -93,10 +93,10 @@ def menu_padrao(titulo, opcoes):
             choice = int(choice)
         else:
             continue
-        if choice == 0 or choice >= len(opcoes):
+        if choice == 0 or choice > len(opcoes):
             return
         print("\n")
-        if a := acoes[choice+1]:
+        if a := acoes[choice-1]:
             a()
 
 
