@@ -1,7 +1,7 @@
 from datetime import datetime
 from crud.crud_medicacao import inserir_medicacao, buscar_medicacao, apagar_medicacao, buscar_medicacoes_por_paciente, atualizar_medicacao
 from crud.crud_paciente import buscar_paciente_por_codigo_usuario
-from util.util import listar_dados, limpa_tela, nome_sistema
+from util.util import listar_dados, limpa_tela, nome_sistema, menu_padrao
 
 def tela_medicacao(codigo_paciente):
 	menu_padrao("Home > Medicacao", [
